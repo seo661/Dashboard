@@ -1,0 +1,6 @@
+# Block all crawlers from this private dashboard
+User-agent: *
+Disallow: /
+
+# Even though this is on github.io, do not index any path.
+# Each HTML page also carries <meta name="robots" content="noindex,nofollow">.
