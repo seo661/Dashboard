@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>LevelUp Insulation - Conversion Dashboard v7</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.5; padding: 16px; }
+.wrap { max-width: 1400px; margin: 0 auto; }
+header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #1e293b; }
+h1 { font-size: 24px; color: #fff; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: #94a3b8; }
+.meta { font-size: 12px; color: #64748b; margin-top: 8px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi { background: #1e293b; border-radius: 8px; padding: 14px; border: 1px solid #334155; }
+.kpi-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.kpi-value { font-size: 24px; font-weight: 700; color: #fff; }
+.kpi-sub { font-size: 11px; color: #64748b; margin-top: 4px; }
+.kpi.green .kpi-value { color: #10b981; }
+.kpi.red .kpi-value { color: #ef4444; }
+.kpi.blue .kpi-value { color: #3b82f6; }
+.kpi.orange .kpi-value { color: #f59e0b; }
+.kpi.purple .kpi-value { color: #c4b5fd; }
+.section { background: #1e293b; border-radius: 10px; padding: 18px; margin-bottom: 16px; border: 1px solid #334155; }
+.section h2 { font-size: 16px; color: #fff; margin-bottom: 6px; }
+.section h2 .icon { font-size: 18px; }
+.section .desc { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; padding: 8px 10px; background: #0f172a; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; border-bottom: 1px solid #334155; }
+td { padding: 9px 10px; border-bottom: 1px solid #334155; vertical-align: top; }
+tr:hover td { background: #1e2a44; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+.tag.qualified, .tag.organic { background: #064e3b; color: #6ee7b7; }
+.tag.out_of_area, .tag.invalid_phone { background: #422006; color: #fbbf24; }
+.tag.paid { background: #4c1d95; color: #c4b5fd; }
+.tag.direct { background: #374151; color: #d1d5db; }
+.tag.referral { background: #1e40af; color: #93c5fd; }
+.btn-link { display: inline-block; padding: 3px 8px; background: #312e81; color: #c7d2fe; text-decoration: none; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.btn-link:hover { background: #4338ca; color: #fff; }
+.btn-link.lo { background: #7c2d12; color: #fed7aa; }
+.btn-link.lo:hover { background: #9a3412; color: #fff; }
+.btn-link.ctm { background: #1e3a8a; color: #93c5fd; }
+.flex { display: flex; gap: 6px; flex-wrap: wrap; }
+.banner { background: linear-gradient(90deg, #4c1d95 0%, #1e3a8a 100%); padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; color: #fff; border-left: 4px solid #f59e0b; }
+.warn { background: #422006; padding: 10px 14px; border-radius: 6px; font-size: 12px; color: #fbbf24; border-left: 3px solid #f59e0b; margin-bottom: 12px; }
+.scroll { max-height: 520px; overflow-y: auto; border-radius: 6px; }
+.scroll::-webkit-scrollbar { width: 6px; }
+.scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid #334155; margin-bottom: 12px; }
+.tab { padding: 8px 14px; background: transparent; color: #94a3b8; border: none; cursor: pointer; font-size: 13px; border-bottom: 2px solid transparent; }
+.tab.active { color: #fff; border-bottom-color: #6366f1; }
+.tab:hover { color: #fff; }
+.hide { display: none; }
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; padding: 16px 0; height: 200px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.bar { width: 100%; min-height: 4px; border-radius: 4px 4px 0 0; transition: opacity 0.2s; cursor: pointer; }
+.bar:hover { opacity: 0.85; }
+.bar-label { font-size: 10px; color: #94a3b8; text-align: center; }
+.bar-value { font-size: 13px; font-weight: 700; color: #fff; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .split { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>LevelUp Insulation - Conversion Dashboard</h1>
+  <div class="subtitle">Verified Conversions, Cross-Referenced from Lucky Orange + Gravity Forms + Google Ads + CTM</div>
+  <div class="meta">Generated <span id="genTime"></span> | Period: April 7, 2026 to May 7, 2026 | Sources: 832 LO sessions / 35 WP form leads / 120 CTM calls / Search-LU-Denver campaign</div>
+</header>
+
+<div class="banner">
+  <strong>The big picture:</strong> Out of 832 sessions in the last 30 days, 161 came from your Google Ads. Lucky Orange tagged 41 sessions as form-completers (Thank-You page). After deduplication, <strong>9 of those were verified paid conversions</strong>, 13 organic, 4 direct, 2 referral.
+</div>
+
+<div class="kpis">
+  <div class="kpi blue">
+    <div class="kpi-label">Total Sessions (30d)</div>
+    <div class="kpi-value">832</div>
+    <div class="kpi-sub">tracked by Lucky Orange</div>
+  </div>
+  <div class="kpi purple">
+    <div class="kpi-label">Paid Sessions (UTM=cpc)</div>
+    <div class="kpi-value">161</div>
+    <div class="kpi-sub">19.4% of total traffic</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-label">Total Conversions Tagged</div>
+    <div class="kpi-value">41</div>
+    <div class="kpi-sub">28 unique + 13 TY-page revisits</div>
+  </div>
+  <div class="kpi orange">
+    <div class="kpi-label">Paid Conversions (Verified)</div>
+    <div class="kpi-value">9</div>
+    <div class="kpi-sub">5.59% paid CR</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-label">Form Leads (WP)</div>
+    <div class="kpi-value">35</div>
+    <div class="kpi-sub">19 qualified, 16 spam</div>
+  </div>
+</div>
+
+<div class="split">
+  <div class="section">
+    <h2>Conversions by Source (Verified, last 30d)</h2>
+    <div class="desc">Of 28 unique form completions Lucky Orange recorded with the Thank-You tag.</div>
+    <div class="bar-chart">
+      <div class="bar-col">
+        <div class="bar-value">9</div>
+        <div class="bar" style="height: 108.0px; background: linear-gradient(180deg, #c4b5fd 0%, #4c1d95 100%);"></div>
+        <div class="bar-label">Paid<br>(Google Ads)</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">13</div>
+        <div class="bar" style="height: 156.0px; background: linear-gradient(180deg, #6ee7b7 0%, #064e3b 100%);"></div>
+        <div class="bar-label">Organic<br>(Google/Bing/DDG)</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">4</div>
+        <div class="bar" style="height: 48.0px; background: linear-gradient(180deg, #d1d5db 0%, #374151 100%);"></div>
+        <div class="bar-label">Direct<br>(no referrer)</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">2</div>
+        <div class="bar" style="height: 24.0px; background: linear-gradient(180deg, #93c5fd 0%, #1e40af 100%);"></div>
+        <div class="bar-label">Referral<br>(yelp, hvacree)</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#64748b;text-align:center;margin-top:8px;">32% Paid · 46% Organic · 14% Direct · 7% Referral</div>
+  </div>
+  
+  <div class="section">
+    <h2>Paid Conversion Funnel</h2>
+    <div class="desc">From Google Ads click to verified form submission.</div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:10px 0;">
+      <div style="background:#312e81;padding:12px 16px;border-radius:6px;border-left:4px solid #6366f1;">
+        <div style="font-size:11px;color:#a5b4fc;text-transform:uppercase;">Paid Sessions</div>
+        <div style="font-size:24px;font-weight:700;color:#fff;">161</div>
+      </div>
+      <div style="background:#1e3a8a;padding:12px 16px;border-radius:6px;border-left:4px solid #3b82f6;margin-left:30px;">
+        <div style="font-size:11px;color:#93c5fd;text-transform:uppercase;">Sessions on Content Page</div>
+        <div style="font-size:22px;font-weight:700;color:#fff;">~161 <span style="font-size:12px;color:#93c5fd;font-weight:400">most landed on / or service pages</span></div>
+      </div>
+      <div style="background:#064e3b;padding:12px 16px;border-radius:6px;border-left:4px solid #10b981;margin-left:60px;">
+        <div style="font-size:11px;color:#6ee7b7;text-transform:uppercase;">Verified Paid Conversions</div>
+        <div style="font-size:24px;font-weight:700;color:#fff;">9</div>
+        <div style="font-size:11px;color:#6ee7b7;">5.59% conversion rate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Search Terms That Drove Verified Paid Conversions</h2>
+  <div class="desc">Each row is a Google Ads search term where Lucky Orange recorded the visitor reaching the Thank-You page. Click to watch the recording.</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Search Term (UTM)</th>
+        <th>Conversions</th>
+        <th>Recordings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:#c7d2fe">insulation removal</strong></td>
+        <td><strong>2</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777912563822-c39fd89c24f986a4" target="_blank" class="btn-link lo">[1]</a> <a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776956253630-0d9c94a821990d08" target="_blank" class="btn-link lo">[2]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">home insulation services</strong></td>
+        <td><strong>2</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776460929280-caf7505028233420" target="_blank" class="btn-link lo">[1]</a> <a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776358554873-fa6334749aae16e4" target="_blank" class="btn-link lo">[2]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">insulation contractors denver</strong></td>
+        <td><strong>1</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777321286888-6823a40083367922" target="_blank" class="btn-link lo">[1]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">insulation companies denver</strong></td>
+        <td><strong>1</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776865621411-36fc0daedcf6e62d" target="_blank" class="btn-link lo">[1]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">home insulation services denver</strong></td>
+        <td><strong>1</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776363536096-391fa9fb1c0612b1" target="_blank" class="btn-link lo">[1]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">spray foam insulation for houses</strong></td>
+        <td><strong>1</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776180975749-abe1e61f7be7b9b5" target="_blank" class="btn-link lo">[1]</a></div></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#c7d2fe">attic insulation near me</strong></td>
+        <td><strong>1</strong></td>
+        <td><div class="flex"><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776091230386-7a1d0a31825dbf1f" target="_blank" class="btn-link lo">[1]</a></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>All 28 Verified Conversions (Lucky Orange)</h2>
+  <div class="desc">Every form completion in the last 30 days, with source and search term. /thank-you/ direct revisits excluded as duplicates.</div>
+  <div class="tabs">
+    <button class="tab active" onclick="filterConv('all', this)">All (28)</button>
+    <button class="tab" onclick="filterConv('paid', this)">Paid (9)</button>
+    <button class="tab" onclick="filterConv('organic', this)">Organic (13)</button>
+    <button class="tab" onclick="filterConv('direct', this)">Direct (4)</button>
+    <button class="tab" onclick="filterConv('referral', this)">Referral (2)</button>
+  </div>
+  <div class="scroll">
+  <table id="convTable">
+    <thead>
+      <tr>
+        <th>Date / Time</th>
+        <th>Source</th>
+        <th>Search Term</th>
+        <th>Landing</th>
+        <th>Location</th>
+        <th>Time</th>
+        <th>Recording</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">May 6 at 9:53pm</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>3m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1778084589771-2bae56bf4916a0cd" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="referral">
+        <td style="white-space:nowrap;font-size:11px;">May 6 at 12:48am</td>
+        <td><span class="tag referral">Referral</span><br><span style="font-size:10px;color:#94a3b8;">app.hvacree.net</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1778008718378-c92e6224ba274d80" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">May 5 at 11:35pm</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1778004305556-1224cd7c02ef5059" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">May 4 at 10:06pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">insulation removal</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777912563822-c39fd89c24f986a4" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">May 3 at 5:41am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">DuckDuckGo</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/arvada-insulation-removal/</code></td>
+        <td>Denver, Colorado</td>
+        <td>12m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777767064028-8137ff9426550bfa" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">May 2 at 3:02am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/resource/best-insulation-for-attics/</code></td>
+        <td>Highlands Ranch, Colorado</td>
+        <td>7m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777671171381-b647cb3c9eea21e5" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">May 1 at 2:41am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Selma, North Carolina</td>
+        <td>59s</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777583471996-cd4a5c48978b335b" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 28 at 2:35am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777323949019-bb0c3b626d174ccd" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 28 at 1:51am</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">insulation contractors denver</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777321286888-6823a40083367922" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="direct">
+        <td style="white-space:nowrap;font-size:11px;">Apr 27 at 6:15pm</td>
+        <td><span class="tag direct">Direct</span><br><span style="font-size:10px;color:#94a3b8;">Direct Link</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/denver-attic-insulation/</code></td>
+        <td>Denver, Colorado</td>
+        <td>9m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1777293952198-d1f477c0ef0e3fac" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 24 at 5:48am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/spray-foam-insulation/</code></td>
+        <td>Houston, Texas</td>
+        <td>6m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776989929370-cd4b520cbf5de5d7" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 23 at 8:27pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">insulation removal</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Castle Rock, Colorado</td>
+        <td>18m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776956253630-0d9c94a821990d08" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 23 at 5:20am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Bing</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/boulder-pest-control-insulation/</code></td>
+        <td>Denver, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776901809389-e040442e55408158" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 22 at 7:17pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">insulation companies denver</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>3m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776865621411-36fc0daedcf6e62d" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 22 at 12:45am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Lakewood, Colorado</td>
+        <td>2m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776798916236-b62fb35a5ed66ad1" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="referral">
+        <td style="white-space:nowrap;font-size:11px;">Apr 20 at 5:32am</td>
+        <td><span class="tag referral">Referral</span><br><span style="font-size:10px;color:#94a3b8;">m.yelp.com</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Aurora, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776643339585-c39f0197337d70dc" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 19 at 7:40am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>3m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776564604161-7525d6029873b0eb" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 18 at 2:52am</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">home insulation services</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Arvada, Colorado</td>
+        <td>17m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776460929280-caf7505028233420" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 17 at 6:56pm</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>2m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776432395939-161ae3d3d4da6031" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 16 at 11:48pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">home insulation services denver</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Aurora, Colorado</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776363536096-391fa9fb1c0612b1" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 16 at 10:25pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">home insulation services</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>3m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776358554873-fa6334749aae16e4" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="direct">
+        <td style="white-space:nowrap;font-size:11px;">Apr 16 at 8:10pm</td>
+        <td><span class="tag direct">Direct</span><br><span style="font-size:10px;color:#94a3b8;">Direct Link</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Denver, Colorado</td>
+        <td>5m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776350441506-6823ecf43a4fec29" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="direct">
+        <td style="white-space:nowrap;font-size:11px;">Apr 15 at 9:07pm</td>
+        <td><span class="tag direct">Direct</span><br><span style="font-size:10px;color:#94a3b8;">Direct Link</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Parker, Colorado</td>
+        <td>4m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776267430277-4fb3b27e9a345e31" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="direct">
+        <td style="white-space:nowrap;font-size:11px;">Apr 15 at 5:41pm</td>
+        <td><span class="tag direct">Direct</span><br><span style="font-size:10px;color:#94a3b8;">Direct Link</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Orem, Utah</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776255102966-e0a7f92b0e6770a7" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 14 at 9:06pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">spray foam insulation for houses</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/denver-spray-foam-insulation/</code></td>
+        <td>, Colorado</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776180975749-abe1e61f7be7b9b5" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 14 at 2:34am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">Google</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/</code></td>
+        <td>Broomfield, Colorado</td>
+        <td>4m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776114252527-404b430709da0d98" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="paid">
+        <td style="white-space:nowrap;font-size:11px;">Apr 13 at 8:10pm</td>
+        <td><span class="tag paid">Paid (Google Ads)</span><br><span style="font-size:10px;color:#94a3b8;">GooglePPC</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">attic insulation near me</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/denver-attic-insulation/</code></td>
+        <td>Erie, Colorado</td>
+        <td>6m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1776091230386-7a1d0a31825dbf1f" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+      <tr data-source="organic">
+        <td style="white-space:nowrap;font-size:11px;">Apr 9 at 3:29am</td>
+        <td><span class="tag organic">Organic</span><br><span style="font-size:10px;color:#94a3b8;">DuckDuckGo</span></td>
+        <td><strong style="color:#c7d2fe;font-size:11px">(no term)</strong></td>
+        <td><code style="font-size:10px;color:#94a3b8">/crawl-space-encapsulation/</code></td>
+        <td>Denver, Colorado</td>
+        <td>1m</td>
+        <td><a href="https://classic.luckyorange.com/v3/dash.php?#/recordings/play/329247-1775685544085-4f6e7da4d4e93681" target="_blank" class="btn-link lo">Watch</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>WordPress Form Submissions (35 entries)</h2>
+  <div class="desc">All Gravity Forms entries (form ID 2 "Services") in the last 30 days. Status auto-classified by area code + phone validation. Note: WP form-stamp times don't always match LO session times due to timezone differences.</div>
+  <div class="tabs">
+    <button class="tab active" onclick="filterLeads('all', this)">All (35)</button>
+    <button class="tab" onclick="filterLeads('qualified', this)">Qualified (19)</button>
+    <button class="tab" onclick="filterLeads('out_of_area', this)">Out-of-Area</button>
+    <button class="tab" onclick="filterLeads('invalid_phone', this)">Invalid</button>
+  </div>
+  <div class="scroll">
+  <table id="leadTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Landing</th>
+        <th>Status</th>
+        <th>Open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 7, 2026 at 6:03 am</td>
+        <td><strong>Kyle Prawel</strong></td>
+        <td style="font-family:monospace;font-size:11px;">9703082848</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/spray-foam-insulation</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=125" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">May 6, 2026 at 3:13 pm</td>
+        <td><strong>Tyler Larson</strong></td>
+        <td style="font-family:monospace;font-size:11px;">6304850220</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=124" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 6, 2026 at 9:25 am</td>
+        <td><strong>Dustin Jenkins</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7206292514</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=123" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 5, 2026 at 12:24 pm</td>
+        <td><strong>Rashad Booker</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3038279347</td>
+        <td>Pest Control Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/pest-control-insulation</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=122" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 5, 2026 at 11:06 am</td>
+        <td><strong>Tara McMachen</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3038561037</td>
+        <td>Crawl Space Encapsulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=121" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">May 5, 2026 at 8:26 am</td>
+        <td><strong>Isaac Smith</strong></td>
+        <td style="font-family:monospace;font-size:11px;">6472333374</td>
+        <td>Blown-In Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=120" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 4, 2026 at 9:37 am</td>
+        <td><strong>Delia Ramirez</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7202407067</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=119" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 2, 2026 at 5:23 pm</td>
+        <td><strong>David Nash</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3033242417</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=112" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">May 2, 2026 at 1:14 pm</td>
+        <td><strong>Maria Contreras</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7868732678</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=111" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">May 1, 2026 at 2:39 pm</td>
+        <td><strong>Frank Salinas</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3036698254</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/best-insulation-for-attics</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=110" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">May 1, 2026 at 6:11 am</td>
+        <td><strong>David Harris</strong></td>
+        <td style="font-family:monospace;font-size:11px;">5612625431</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=108" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 30, 2026 at 2:12 pm</td>
+        <td><strong>Bill Brauer</strong></td>
+        <td style="font-family:monospace;font-size:11px;">303-598-4209</td>
+        <td>Commercial Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=107" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 30, 2026 at 12:31 pm</td>
+        <td><strong>Sergei Volkov</strong></td>
+        <td style="font-family:monospace;font-size:11px;">4086586191</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=106" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 27, 2026 at 2:11 pm</td>
+        <td><strong>Peter Henriksen</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7202560455</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=105" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 27, 2026 at 1:25 pm</td>
+        <td><strong>Frank Buran</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3035949366</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=104" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 27, 2026 at 5:46 am</td>
+        <td><strong>David Sanderson Vaughn</strong></td>
+        <td style="font-family:monospace;font-size:11px;">4345093976</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=103" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="invalid_phone">
+        <td style="white-space:nowrap;font-size:11px;">April 25, 2026 at 9:26 pm</td>
+        <td><strong>Barbra Foltz</strong></td>
+        <td style="font-family:monospace;font-size:11px;">655740620</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag invalid_phone">Invalid</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=102" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 23, 2026 at 5:25 pm</td>
+        <td><strong>Jonathan Schoemer</strong></td>
+        <td style="font-family:monospace;font-size:11px;">8053053873</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=101" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 23, 2026 at 8:11 am</td>
+        <td><strong>Cynthia L. Ogden</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3033194586</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/attic-sealing</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=100" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 22, 2026 at 4:55 pm</td>
+        <td><strong>Erich Byers</strong></td>
+        <td style="font-family:monospace;font-size:11px;">5633439859</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/insulation-removal-services</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=99" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 22, 2026 at 6:49 am</td>
+        <td><strong>Thomas kisiday</strong></td>
+        <td style="font-family:monospace;font-size:11px;">9412702139</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=98" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 21, 2026 at 12:17 pm</td>
+        <td><strong>Dale Lauzon</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3135501339</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=97" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 20, 2026 at 1:37 am</td>
+        <td><strong>Julian Ann</strong></td>
+        <td style="font-family:monospace;font-size:11px;">9667978593</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=95" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 18, 2026 at 7:13 pm</td>
+        <td><strong>Denise</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3035878083</td>
+        <td>Blown-In Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/blown-in-insulation</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=93" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 17, 2026 at 2:37 pm</td>
+        <td><strong>Brianna DeBoer</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7202271192</td>
+        <td>Blown-In Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=92" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 17, 2026 at 6:29 am</td>
+        <td><strong>Rand Arete</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3233635904</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=91" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 16, 2026 at 11:19 am</td>
+        <td><strong>Sara Ashburn Reed</strong></td>
+        <td style="font-family:monospace;font-size:11px;">720-339-3592</td>
+        <td>Blown-In Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=90" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 16, 2026 at 9:57 am</td>
+        <td><strong>Matt Pasquali</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3612901819</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=89" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 16, 2026 at 7:45 am</td>
+        <td><strong>J.C. Reyes</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3039316789</td>
+        <td>Other / Not Sure</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=88" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 15, 2026 at 8:38 am</td>
+        <td><strong>Benn Walker</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3035220468</td>
+        <td>Blown-In Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=86" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 14, 2026 at 8:37 am</td>
+        <td><strong>Charity Quan</strong></td>
+        <td style="font-family:monospace;font-size:11px;">8586058388</td>
+        <td>Spray Foam Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=81" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 13, 2026 at 2:07 pm</td>
+        <td><strong>Shannon Hunter</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7203942987</td>
+        <td>Insulation Removal</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=79" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="out_of_area">
+        <td style="white-space:nowrap;font-size:11px;">April 13, 2026 at 8:18 am</td>
+        <td><strong>Gavin Blyth</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3149569062</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag out_of_area">Out-of-Area</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=78" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 13, 2026 at 7:46 am</td>
+        <td><strong>Peter KIRN</strong></td>
+        <td style="font-family:monospace;font-size:11px;">3039186563</td>
+        <td>Attic Insulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=77" target="_blank" class="btn-link">View</a></td>
+      </tr>
+      <tr data-status="qualified">
+        <td style="white-space:nowrap;font-size:11px;">April 8, 2026 at 3:00 pm</td>
+        <td><strong>Joaquin Gonzales</strong></td>
+        <td style="font-family:monospace;font-size:11px;">7202731545</td>
+        <td>Crawl Space Encapsulation</td>
+        <td><code style="font-size:11px;color:#94a3b8">/contact</code></td>
+        <td><span class="tag qualified">Qualified</span></td>
+        <td><a href="https://levelupinsulationco.com/wp-admin/admin.php?page=gf_entries&view=entry&id=2&lid=76" target="_blank" class="btn-link">View</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Insights & Next Actions</h2>
+  <ol style="padding-left:20px;font-size:13px;line-height:1.9;color:#cbd5e1;">
+    <li><strong>"Insulation removal" + "home insulation services" are your top paid keywords</strong> — each produced 2 verified conversions in 30 days. Scale these.</li>
+    <li><strong>Denver-modified queries convert</strong> — "insulation companies denver", "insulation contractors denver", "home insulation services denver" all produced verified leads. Geo-modified terms are high-intent.</li>
+    <li><strong>5.59% paid conversion rate</strong> is solid for the home-services category (industry avg 3-5%).</li>
+    <li><strong>22% of all conversions are paid</strong> — paid is materially driving leads, not just traffic.</li>
+    <li><strong>13 Thank-You-page revisits</strong> suggest people are bookmarking or returning to the confirmation page — this is normal but inflates the raw "41 conversions" number. Real new conversions = 28.</li>
+    <li><strong>Add UTM capture as hidden Gravity Form fields</strong> so each WP entry directly stores utm_source/medium/term. Then WP-to-paid attribution becomes 1:1 instead of cross-referenced through LO.</li>
+    <li><strong>Apply CTM dynamic number swap</strong> to landing pages — currently 0/120 CTM calls are attributed to paid. You're losing call-conversion data.</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2 style="font-size:13px;">Data Sources & Refresh</h2>
+  <div style="font-size:12px;color:#94a3b8;line-height:1.7">
+    <strong>Sessions:</strong> 832 from Lucky Orange (all 9 pages walked).<br>
+    <strong>Paid sessions:</strong> 161 filtered by utm_medium=CPC.<br>
+    <strong>Conversions:</strong> 41 sessions tagged "Thank-You" (28 unique + 13 /thank-you/ revisits).<br>
+    <strong>Form entries:</strong> 35 from Gravity Forms ID 2 ("Services") via WP admin.<br>
+    <strong>Calls:</strong> 120 from CallTrackingMetrics account 583997.<br>
+    <strong>Campaign:</strong> "Search - LU - Denver" (Google Ads campaignId 22252780256, account 868-569-0001).<br>
+  </div>
+</div>
+
+<script>
+document.getElementById('genTime').textContent = new Date().toLocaleString('en-US', {dateStyle:'full',timeStyle:'short'});
+
+function filterConv(src, btn) {
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.parentElement === btn.parentElement) t.classList.remove('active');
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('#convTable tbody tr').forEach(r => {
+    if (src === 'all' || r.dataset.source === src) r.classList.remove('hide');
+    else r.classList.add('hide');
+  });
+}
+
+function filterLeads(status, btn) {
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.parentElement === btn.parentElement) t.classList.remove('active');
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('#leadTable tbody tr').forEach(r => {
+    if (status === 'all' || r.dataset.status === status) r.classList.remove('hide');
+    else r.classList.add('hide');
+  });
+}
+</script>
+</div>
+</body>
+</html>
