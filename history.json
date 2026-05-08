@@ -1,0 +1,35 @@
+{
+  "updated": "Friday, May 8, 2026",
+  "days": [
+    {
+      "date": "2026-05-07",
+      "lo_total": 832,
+      "lo_paid": 161,
+      "lo_thankyou": 41,
+      "lo_real_conv": 28,
+      "lo_paid_conv": 9,
+      "paid_cr_pct": 5.59,
+      "wp_total": 35,
+      "wp_qualified": 19,
+      "wp_spam": 16,
+      "ctm_total": 120,
+      "ctm_engaged": null,
+      "ctm_co_engaged": null
+    },
+    {
+      "date": "2026-05-08",
+      "lo_total": 821,
+      "lo_paid": 158,
+      "lo_thankyou": 42,
+      "lo_real_conv": 29,
+      "lo_paid_conv": 9,
+      "paid_cr_pct": 5.7,
+      "wp_total": 36,
+      "wp_qualified": 20,
+      "wp_spam": 2,
+      "ctm_total": 180,
+      "ctm_engaged": 38,
+      "ctm_co_engaged": 25
+    }
+  ]
+}
