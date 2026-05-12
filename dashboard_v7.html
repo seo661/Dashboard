@@ -80,6 +80,7 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 
 <div class="date-picker">
 <span class="label">Snapshot date</span>
+<button class="date-btn" data-date="2026-05-08" onclick="setDate('2026-05-08')">May 8</button>
 <button class="date-btn" data-date="2026-05-09" onclick="setDate('2026-05-09')">May 9</button>
 <button class="date-btn" data-date="2026-05-10" onclick="setDate('2026-05-10')">May 10</button>
 <button class="date-btn active" data-date="2026-05-11" onclick="setDate('2026-05-11')">May 11</button>
@@ -195,6 +196,16 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 </div>
 <script>
 const DATA = {
+  '2026-05-08': {
+    label: 'May 8, 2026', window: 'Apr 12 – May 8',
+    total: 647, paidS: 154, tagged: 35, paidCR: '5.84',
+    orgS: 270, orgCR: '4.44', dirS: 196, dirCR: '2.55', refS: 20, paidS_b: 154, paidCR_b: '5.84',
+    barOrg: 100.0, barDir: 72.6, barPaid: 57.0, barRef: 7.4,
+    noConv: 145, noPct: '94.2', crA: '5.84',
+    wpTotal: 35, wpInvalid: 1, wpDesc: '35 entries through May 8: 19 qualified, 15 OOA, 1 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9',
+    dirPct: 30, ftText: 'Snapshot: May 8, 2026 · Lucky Orange (647 sessions, Apr 12 – May 8) · Gravity Forms (35 entries) · CallTrackingMetrics (609 calls, carry-forward) · Google Ads (Search-LU-Denver, ocid 1561208626).'
+  },
   '2026-05-09': {
     label: 'May 9, 2026', window: 'Apr 12 – May 9',
     total: 695, paidS: 160, tagged: 35, paidCR: '5.63',
