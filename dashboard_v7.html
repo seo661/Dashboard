@@ -8,412 +8,314 @@
 <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <title>LevelUp Insulation - Conversion Dashboard v7</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;line-height:1.5;padding:16px}
-.wrap{max-width:1400px;margin:0 auto}
-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #1e293b}
-h1{font-size:24px;color:#fff;margin-bottom:4px}
-.subtitle{font-size:13px;color:#94a3b8}
-.meta{font-size:12px;color:#64748b;margin-top:6px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
-.kpi{background:#1e293b;border-radius:8px;padding:12px;border:1px solid #334155}
-.kpi-label{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
-.kpi-value{font-size:22px;font-weight:700;color:#fff}
-.kpi-sub{font-size:10px;color:#64748b;margin-top:3px}
-.kpi.green .kpi-value{color:#10b981}.kpi.red .kpi-value{color:#ef4444}.kpi.blue .kpi-value{color:#3b82f6}.kpi.orange .kpi-value{color:#f59e0b}.kpi.purple .kpi-value{color:#c4b5fd}
-.section{background:#1e293b;border-radius:10px;padding:14px 16px;margin-bottom:14px;border:1px solid #334155}
-.section h2{font-size:15px;color:#fff;margin-bottom:4px}
-.section .desc{font-size:11px;color:#94a3b8;margin-bottom:10px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{text-align:left;padding:6px 8px;background:#0f172a;color:#94a3b8;font-weight:600;text-transform:uppercase;font-size:9px;letter-spacing:0.4px;border-bottom:1px solid #334155;position:sticky;top:0}
-td{padding:7px 8px;border-bottom:1px solid #334155;vertical-align:top}
-tr:hover td{background:#1e2a44}
-.tag{display:inline-block;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:600;text-transform:uppercase}
-.tag.qualified,.tag.organic{background:#064e3b;color:#6ee7b7}
-.tag.out_of_area,.tag.invalid_phone,.tag.short_call{background:#422006;color:#fbbf24}
-.tag.paid{background:#4c1d95;color:#c4b5fd}
-.tag.direct{background:#374151;color:#d1d5db}
-.tag.referral{background:#1e40af;color:#93c5fd}
-.tag.revisit{background:#374151;color:#9ca3af}
-.tag.gbp{background:#155e75;color:#67e8f9}
-.tag.answered{background:#064e3b;color:#6ee7b7}
-.tag.no_answer{background:#422006;color:#fbbf24}
-.btn-link{display:inline-block;padding:2px 6px;background:#312e81;color:#c7d2fe;text-decoration:none;border-radius:3px;font-size:9px;font-weight:600}
-.btn-link:hover{background:#4338ca;color:#fff}
-.banner{background:linear-gradient(90deg,#4c1d95 0%,#1e3a8a 100%);padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:12px;color:#fff;border-left:4px solid #f59e0b}
-.warn{background:#422006;padding:8px 12px;border-radius:5px;font-size:11px;color:#fbbf24;border-left:3px solid #f59e0b;margin-bottom:10px}
-.scroll{max-height:520px;overflow-y:auto;border-radius:5px}
-.scroll::-webkit-scrollbar{width:5px}
-.scroll::-webkit-scrollbar-thumb{background:#475569;border-radius:3px}
-.tabs{display:flex;gap:4px;border-bottom:1px solid #334155;margin-bottom:8px;flex-wrap:wrap}
-.tab{padding:6px 12px;background:transparent;color:#94a3b8;border:none;cursor:pointer;font-size:12px;border-bottom:2px solid transparent}
-.tab.active{color:#fff;border-bottom-color:#6366f1}
-.tab:hover{color:#fff}
-.bar-chart{display:flex;align-items:flex-end;gap:6px;padding:12px 0;height:160px}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:48px}
-.bar{width:100%;min-height:3px;border-radius:3px 3px 0 0}
-.bar-label{font-size:9px;color:#94a3b8;text-align:center}
-.bar-value{font-size:11px;font-weight:700;color:#fff}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.funnel-step{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:5px;margin-bottom:5px;border-left:3px solid #6366f1}
-.funnel-bar{height:22px;background:linear-gradient(90deg,#6366f1,#8b5cf6);border-radius:3px;min-width:3px}
-.funnel-num{font-size:16px;font-weight:700;color:#fff;min-width:42px}
-.funnel-label{font-size:11px;color:#cbd5e1;flex:1}
-.funnel-pct{font-size:10px;color:#6ee7b7}
-.rec{background:#0f172a;border-left:3px solid #10b981;padding:10px 12px;margin-bottom:6px;border-radius:3px}
-.rec.warn{border-left-color:#f59e0b}.rec.bad{border-left-color:#ef4444}
-.rec h3{font-size:12px;color:#fff;margin-bottom:3px}
-.rec p{font-size:11px;color:#cbd5e1}
-.filterbar{display:flex;align-items:center;gap:14px;margin-bottom:12px;padding:10px 14px;background:#1e293b;border-radius:8px;flex-wrap:wrap;border:1px solid #334155}
-.filterbar label{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;font-weight:600}
-.period-tabs{display:inline-flex;gap:4px;background:#0f172a;border-radius:5px;padding:3px}
-.period-tab{padding:5px 10px;background:transparent;color:#94a3b8;border:none;cursor:pointer;font-size:11px;border-radius:4px}
-.period-tab.active{background:#6366f1;color:#fff}
-.date-input{background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:4px;padding:5px 8px;font-size:11px}
-.date-input:focus{outline:none;border-color:#6366f1}
-.archive-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
-.archive-item{background:#0f172a;border:1px solid #334155;border-radius:5px;padding:8px 12px;font-size:11px;color:#cbd5e1}
-.archive-item a{color:#a5b4fc;text-decoration:none;font-weight:600}
-.archive-item a:hover{color:#fff}
-.archive-item .archive-date{font-size:10px;color:#64748b;display:block;margin-bottom:2px}
-@media(max-width:768px){.split{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.filterbar{flex-direction:column;align-items:flex-start}}
-.footer{margin-top:20px;padding-top:14px;border-top:1px solid #334155;font-size:10px;color:#64748b;text-align:center}
-.pie-svg{width:140px;height:140px;display:inline-block;vertical-align:middle}
-.legend{display:inline-block;vertical-align:middle;margin-left:14px;font-size:11px;color:#cbd5e1}
-.legend-item{display:flex;align-items:center;gap:6px;margin-bottom:3px}
-.legend-color{width:10px;height:10px;border-radius:2px}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
-.stat-box{background:#0f172a;padding:8px;border-radius:5px;border:1px solid #334155}
-.stat-num{font-size:18px;font-weight:700;color:#fff}
-.stat-lab{font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.3px}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.5; padding: 16px; }
+.wrap { max-width: 1400px; margin: 0 auto; }
+header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #1e293b; }
+h1 { font-size: 24px; color: #fff; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: #94a3b8; }
+.meta { font-size: 12px; color: #64748b; margin-top: 8px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi { background: #1e293b; border-radius: 8px; padding: 14px; border: 1px solid #334155; }
+.kpi-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.kpi-value { font-size: 24px; font-weight: 700; color: #fff; }
+.kpi-sub { font-size: 11px; color: #64748b; margin-top: 4px; }
+.kpi.green .kpi-value { color: #10b981; }
+.kpi.blue .kpi-value { color: #3b82f6; }
+.kpi.orange .kpi-value { color: #f59e0b; }
+.kpi.purple .kpi-value { color: #c4b5fd; }
+.section { background: #1e293b; border-radius: 10px; padding: 18px; margin-bottom: 16px; border: 1px solid #334155; }
+.section h2 { font-size: 16px; color: #fff; margin-bottom: 6px; }
+.section .desc { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; padding: 8px 10px; background: #0f172a; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; border-bottom: 1px solid #334155; }
+td { padding: 9px 10px; border-bottom: 1px solid #334155; vertical-align: top; }
+tr:hover td { background: #1e2a44; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+.tag.qualified, .tag.organic { background: #064e3b; color: #6ee7b7; }
+.tag.out_of_area, .tag.invalid_phone { background: #422006; color: #fbbf24; }
+.tag.paid { background: #4c1d95; color: #c4b5fd; }
+.tag.direct { background: #374151; color: #d1d5db; }
+.tag.referral { background: #1e40af; color: #93c5fd; }
+.scroll { max-height: 480px; overflow-y: auto; }
+.tabs { display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap; }
+.tab { background: #0f172a; border: 1px solid #334155; color: #94a3b8; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600; }
+.tab.active, .tab:hover { background: #334155; color: #fff; }
+.srow { display: grid; grid-template-columns: 90px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
+.slabel { font-size: 12px; color: #94a3b8; }
+.sbarwrap { position: relative; height: 24px; background: #0f172a; border-radius: 4px; }
+.sbar { height: 100%; border-radius: 4px; opacity: 0.85; transition: width 0.4s ease; }
+.snum { position: absolute; top: 4px; left: 8px; font-size: 11px; color: #fff; font-weight: 600; }
+.funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+.funnel-step { background: #0f172a; border: 1px solid #334155; padding: 12px; border-radius: 8px; text-align: center; }
+.funnel-step .v { font-size: 20px; font-weight: 700; color: #fff; }
+.funnel-step .l { font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-top: 4px; }
+.funnel-step .arrow { font-size: 10px; color: #64748b; margin-top: 4px; }
+.rec { background: #0f172a; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-bottom: 8px; border-radius: 0 6px 6px 0; }
+.rec.warn { border-left-color: #f59e0b; }
+.rec.good { border-left-color: #10b981; }
+.rec h3 { font-size: 13px; color: #fff; margin-bottom: 4px; }
+.rec p { font-size: 12px; color: #94a3b8; }
+.footer { text-align: center; padding: 20px; color: #64748b; font-size: 11px; }
+.play { color: #93c5fd; text-decoration: none; font-size: 11px; }
+.play:hover { text-decoration: underline; }
+a { color: #93c5fd; }
+.date-picker { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #1e293b; padding: 12px 16px; border-radius: 8px; border: 1px solid #334155; margin-bottom: 16px; }
+.date-picker .label { font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.date-btn { background: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; transition: background 0.15s; }
+.date-btn:hover { background: #334155; }
+.date-btn.active { background: #4c1d95; color: #fff; border-color: #6d28d9; font-weight: 600; }
+.day-badge { background: #4c1d95; color: #c4b5fd; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; display: inline-block; margin-left: 10px; }
+.may11-only { display: none; }
+body.day-2026-05-11 .may11-only { display: table-row; }
 </style>
 </head>
-<body>
+<body class="day-2026-05-11">
 <div class="wrap">
 <header>
-  <h1>LevelUp Insulation - Conversion Dashboard</h1>
-  <div class="subtitle">Verified Conversions, Cross-Referenced from Lucky Orange + Gravity Forms + Google Ads + CTM</div>
-  <div class="meta">Generated <span id="genTime"></span> | Period: <span id="periodLabel">April 9, 2026 to May 9, 2026 (30-day rolling)</span> | Sources: 827 LO sessions / 35 WP form leads / 609 CTM calls / Search-LU-Denver campaign</div>
+<h1>LevelUp Insulation &mdash; Conversion Dashboard v7 <span class="day-badge" id="dayBadge">Snapshot: May 11, 2026</span></h1>
+<div class="subtitle">30-day window &middot; Lucky Orange &middot; Gravity Forms &middot; Google Ads (Search-LU-Denver)</div>
+<div class="meta">Use the date picker to switch between snapshots. URL hash (<code>#2026-05-09</code>) is shareable per day.</div>
 </header>
 
-<div class="filterbar">
-  <div><label>Period:</label>
-    <span class="period-tabs" id="periodTabs">
-      <button class="period-tab" data-days="7">7 days</button>
-      <button class="period-tab" data-days="14">14 days</button>
-      <button class="period-tab active" data-days="30">30 days</button>
-    </span>
-  </div>
-  <div><label>Pick a date:</label>
-    <input type="date" class="date-input" id="datePicker" min="2026-05-01" max="2026-05-09" value="2026-05-09">
-    <button class="btn-link" onclick="loadArchive()" style="padding:5px 10px;font-size:11px">Load archive</button>
-  </div>
-  <div style="margin-left:auto;font-size:10px;color:#64748b">Showing live build for May 9, 2026</div>
-</div>
-
-<div class="banner">
-  <strong>The big picture:</strong> Out of 827 sessions in the last 30 days, 165 came from Google Ads. Lucky Orange tagged 23 sessions as form-completers. After excluding 13 thank-you-page revisits, <strong>10 unique real conversions</strong> &mdash; 1 paid (Google PPC, &ldquo;insulation removal&rdquo;), 5 organic, 2 direct, 2 referral. CTM logged 609 calls (sample shows 62% organic-Google, 12% GBP voicemails, 78% under 60s). Form-leads steady at 35.
+<div class="date-picker">
+<span class="label">Snapshot date</span>
+<button class="date-btn" data-date="2026-05-09" onclick="setDate('2026-05-09')">May 9</button>
+<button class="date-btn" data-date="2026-05-10" onclick="setDate('2026-05-10')">May 10</button>
+<button class="date-btn active" data-date="2026-05-11" onclick="setDate('2026-05-11')">May 11</button>
 </div>
 
 <div class="kpis">
-  <div class="kpi blue"><div class="kpi-label">Total Sessions (30d)</div><div class="kpi-value">827</div><div class="kpi-sub">Lucky Orange</div></div>
-  <div class="kpi purple"><div class="kpi-label">Paid Sessions (cpc)</div><div class="kpi-value">165</div><div class="kpi-sub">19.9% of traffic</div></div>
-  <div class="kpi green"><div class="kpi-label">Conversions Tagged</div><div class="kpi-value">23</div><div class="kpi-sub">10 unique + 13 revisits</div></div>
-  <div class="kpi orange"><div class="kpi-label">Paid Verified</div><div class="kpi-value">1</div><div class="kpi-sub">0.61% paid CR</div></div>
-  <div class="kpi green"><div class="kpi-label">Form Leads (WP)</div><div class="kpi-value">35</div><div class="kpi-sub">19/15/1</div></div>
-  <div class="kpi blue"><div class="kpi-label">CTM Calls (30d)</div><div class="kpi-value">609</div><div class="kpi-sub">~62% organic-Google</div></div>
+<div class="kpi blue"><div class="kpi-label">Total Sessions</div><div class="kpi-value" id="kpi-total">769</div><div class="kpi-sub" id="kpi-total-sub">Apr 12 &ndash; May 11</div></div>
+<div class="kpi purple"><div class="kpi-label">Paid Sessions</div><div class="kpi-value" id="kpi-paidS">173</div><div class="kpi-sub">utm_medium=cpc</div></div>
+<div class="kpi orange"><div class="kpi-label">Total Conv. Tagged</div><div class="kpi-value" id="kpi-tagged">35</div><div class="kpi-sub">7 thank-you revisits excluded</div></div>
+<div class="kpi green"><div class="kpi-label">Paid Conv. Verified</div><div class="kpi-value">9</div><div class="kpi-sub">Paid CR <span id="kpi-paidCR">5.20</span>%</div></div>
+<div class="kpi"><div class="kpi-label">WP Form Leads</div><div class="kpi-value" id="kpi-wp">36</div><div class="kpi-sub" id="kpi-wp-sub">19 qual &middot; 15 OOA &middot; 2 invalid</div></div>
+<div class="kpi"><div class="kpi-label">CTM Calls</div><div class="kpi-value" id="kpi-ctm">609</div><div class="kpi-sub" id="kpi-ctm-sub">Last 30 days &middot; from May 9 build</div></div>
 </div>
 
 <div class="section">
-  <h2>Source Breakdown &mdash; LO Sessions by Channel</h2>
-  <div class="desc">Where the 827 Lucky Orange sessions originated.</div>
-  <div class="bar-chart">
-    <div class="bar-col"><div class="bar-value">328</div><div class="bar" style="height:100%;background:#6b7280"></div><div class="bar-label">Direct Link</div></div>
-    <div class="bar-col"><div class="bar-value">294</div><div class="bar" style="height:89.6%;background:#10b981"></div><div class="bar-label">Google Organic</div></div>
-    <div class="bar-col"><div class="bar-value">156</div><div class="bar" style="height:47.6%;background:#8b5cf6"></div><div class="bar-label">Google PPC</div></div>
-    <div class="bar-col"><div class="bar-value">10</div><div class="bar" style="height:3%;background:#f59e0b"></div><div class="bar-label">DuckDuckGo</div></div>
-    <div class="bar-col"><div class="bar-value">9</div><div class="bar" style="height:2.7%;background:#ef4444"></div><div class="bar-label">Yelp</div></div>
-    <div class="bar-col"><div class="bar-value">8</div><div class="bar" style="height:2.4%;background:#3b82f6"></div><div class="bar-label">Bing</div></div>
-    <div class="bar-col"><div class="bar-value">8</div><div class="bar" style="height:2.4%;background:#ec4899"></div><div class="bar-label">HVAC Tree</div></div>
-    <div class="bar-col"><div class="bar-value">5</div><div class="bar" style="height:1.5%;background:#14b8a6"></div><div class="bar-label">BBB</div></div>
-    <div class="bar-col"><div class="bar-value">9</div><div class="bar" style="height:2.7%;background:#94a3b8"></div><div class="bar-label">Other</div></div>
-  </div>
+<h2>Source Breakdown</h2>
+<div class="desc">All <span id="sb-total">769</span> sessions classified by referrer/UTM. Conversion = Thank-You-tagged session that did not land on /thank-you/.</div>
+<div class="srow"><div class="slabel">Organic</div><div class="sbarwrap"><div class="sbar" id="bar-org" style="width:100.0%;background:#10b981"></div><div class="snum"><span id="sb-orgS">350</span> sess &middot; 12 conv &middot; <span id="sb-orgCR">3.43</span>% CR</div></div></div>
+<div class="srow"><div class="slabel">Direct</div><div class="sbarwrap"><div class="sbar" id="bar-dir" style="width:62.0%;background:#94a3b8"></div><div class="snum"><span id="sb-dirS">217</span> sess &middot; 5 conv &middot; <span id="sb-dirCR">2.30</span>% CR</div></div></div>
+<div class="srow"><div class="slabel">Paid</div><div class="sbarwrap"><div class="sbar" id="bar-paid" style="width:49.4%;background:#c4b5fd"></div><div class="snum"><span id="sb-paidS">173</span> sess &middot; 9 conv &middot; <span id="sb-paidCR">5.20</span>% CR</div></div></div>
+<div class="srow"><div class="slabel">Referral</div><div class="sbarwrap"><div class="sbar" id="bar-ref" style="width:6.0%;background:#93c5fd"></div><div class="snum"><span id="sb-refS">21</span> sess &middot; 2 conv &middot; 9.52% CR</div></div></div>
 </div>
 
 <div class="section">
-  <h2>Paid Search Funnel &mdash; Search-LU-Denver Campaign</h2>
-  <div class="desc">From Google Ads spend to verified paid conversion.</div>
-  <div class="funnel-step"><div class="funnel-num">165</div><div class="funnel-label">Paid Sessions Captured (utm_medium=cpc)</div><div class="funnel-bar" style="width:100%"></div><div class="funnel-pct">100%</div></div>
-  <div class="funnel-step" style="border-left-color:#8b5cf6"><div class="funnel-num">156</div><div class="funnel-label">Source = &ldquo;Google PPC&rdquo;</div><div class="funnel-bar" style="width:94.5%;background:linear-gradient(90deg,#8b5cf6,#a855f7)"></div><div class="funnel-pct">94.5%</div></div>
-  <div class="funnel-step" style="border-left-color:#f59e0b"><div class="funnel-num">1</div><div class="funnel-label">Tagged Thank-You from Paid Click</div><div class="funnel-bar" style="width:0.6%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div><div class="funnel-pct">0.61%</div></div>
-  <div class="funnel-step" style="border-left-color:#10b981"><div class="funnel-num">1</div><div class="funnel-label">Verified Paid Conversion (after revisit dedup)</div><div class="funnel-bar" style="width:0.6%;background:linear-gradient(90deg,#10b981,#14b8a6)"></div><div class="funnel-pct">0.61%</div></div>
+<h2>Paid Conversion Funnel</h2>
+<div class="desc">Search-LU-Denver campaign &middot; Google Ads ocid 1561208626 &middot; all sessions with utm_medium=cpc.</div>
+<div class="funnel">
+<div class="funnel-step"><div class="v" id="fn-paidS">173</div><div class="l">Paid Sessions</div><div class="arrow">&rarr;</div></div>
+<div class="funnel-step"><div class="v" id="fn-noConv">164</div><div class="l">No Conversion</div><div class="arrow"><span id="fn-noPct">94.8</span>%</div></div>
+<div class="funnel-step"><div class="v">9</div><div class="l">Conversions</div><div class="arrow"><span id="fn-crA">5.20</span>% CR</div></div>
+<div class="funnel-step"><div class="v" style="color:#10b981"><span id="fn-crB">5.20</span>%</div><div class="l">Conversion Rate</div><div class="arrow">paid</div></div>
 </div>
-
-<div class="warn">
-  <strong>Heads-up:</strong> Paid CR collapsed from last month&#39;s 5.59% to today&#39;s 0.61%. Investigate Google Ads change history.
-</div>
-
-<div class="section">
-  <h2>CallTrackingMetrics &mdash; Source Mix &amp; Spam Stats (sample of 40)</h2>
-  <div class="desc">Aggregated from the most-recent 40 calls visible on the CTM list. Total 30-day count is 609 calls (full enumeration not done; sample provides directional ratios).</div>
-  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-    <div>
-      <svg class="pie-svg" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="75" fill="none" stroke="#10b981" stroke-width="50" stroke-dasharray="294 471" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
-        <circle cx="100" cy="100" r="75" fill="none" stroke="#155e75" stroke-width="50" stroke-dasharray="59 471" stroke-dashoffset="-294" transform="rotate(-90 100 100)"/>
-        <circle cx="100" cy="100" r="75" fill="none" stroke="#94a3b8" stroke-width="50" stroke-dasharray="118 471" stroke-dashoffset="-353" transform="rotate(-90 100 100)"/>
-        <text x="100" y="105" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">40</text>
-        <text x="100" y="125" text-anchor="middle" fill="#94a3b8" font-size="10">Sample</text>
-      </svg>
-      <div class="legend">
-        <div class="legend-item"><span class="legend-color" style="background:#10b981"></span>Organic Google &mdash; 25 (62.5%)</div>
-        <div class="legend-item"><span class="legend-color" style="background:#155e75"></span>Google Business Profile &mdash; 5 (12.5%)</div>
-        <div class="legend-item"><span class="legend-color" style="background:#94a3b8"></span>Other / Unclassified &mdash; 10 (25%)</div>
-        <div class="legend-item"><span class="legend-color" style="background:#4c1d95"></span>Paid (cpc) &mdash; 0 (0%)</div>
-      </div>
-    </div>
-    <div class="stats-grid" style="flex:1;min-width:300px">
-      <div class="stat-box"><div class="stat-num">31</div><div class="stat-lab">Short calls (&lt;60s)</div></div>
-      <div class="stat-box"><div class="stat-num">5</div><div class="stat-lab">Medium 1-5 min</div></div>
-      <div class="stat-box"><div class="stat-num">4</div><div class="stat-lab">Long &gt;5 min</div></div>
-      <div class="stat-box"><div class="stat-num">23</div><div class="stat-lab">Answered</div></div>
-      <div class="stat-box"><div class="stat-num">7</div><div class="stat-lab">No answer</div></div>
-      <div class="stat-box"><div class="stat-num" style="color:#fbbf24">~78%</div><div class="stat-lab">Likely spam (&lt;60s)</div></div>
-    </div>
-  </div>
 </div>
 
 <div class="section">
-  <h2>Top 10 LO Recordings by Time-on-Site (Thank-You tagged)</h2>
-  <div class="desc">Highest-engagement tagged sessions ranked by time on site. Click &ldquo;Open in LO&rdquo; to view the full recording in Lucky Orange.</div>
-  <div class="scroll">
-    <table>
-      <thead><tr><th>Rank</th><th>Time</th><th>Source</th><th>Search Term</th><th>Date</th><th>Location</th><th>Landing &rarr; Exit</th><th>Recording</th></tr></thead>
-      <tbody>
-<tr><td><strong>1</strong></td><td><strong>18m</strong></td><td><span class="tag paid">PAID</span> Google PPC</td><td>insulation removal</td><td>Apr 23, 2026, 8:27 PM</td><td>Castle Rock, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>2</strong></td><td><strong>15m</strong></td><td><span class="tag revisit">REVISIT</span> Direct Link</td><td>&mdash;</td><td>Apr 10, 2026, 7:46 AM</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>3</strong></td><td><strong>7m</strong></td><td><span class="tag organic">ORGANIC</span> Google</td><td>&mdash;</td><td>May 2, 2026, 3:02 AM</td><td>Highlands Ranch, CO</td><td>/resource/best-insulation-for-attics/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>4</strong></td><td><strong>5m</strong></td><td><span class="tag referral">REFERRAL</span> app.hvacree.net</td><td>&mdash;</td><td>May 6, 2026, 12:48 AM</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>5</strong></td><td><strong>5m</strong></td><td><span class="tag organic">ORGANIC</span> Bing</td><td>&mdash;</td><td>Apr 23, 2026, 5:20 AM</td><td>Denver, CO</td><td>/boulder-pest-control-insulation/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>6</strong></td><td><strong>5m</strong></td><td><span class="tag referral">REFERRAL</span> m.yelp.com</td><td>&mdash;</td><td>Apr 20, 2026, 5:32 AM</td><td>Aurora, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>7</strong></td><td><strong>3m</strong></td><td><span class="tag organic">ORGANIC</span> Google</td><td>&mdash;</td><td>May 6, 2026, 9:53 PM</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>8</strong></td><td><strong>3m</strong></td><td><span class="tag organic">ORGANIC</span> Google</td><td>&mdash;</td><td>Apr 19, 2026, 7:40 AM</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>9</strong></td><td><strong>1m</strong></td><td><span class="tag direct">DIRECT</span> Direct Link</td><td>&mdash;</td><td>May 8, 2026, 6:54 AM</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-<tr><td><strong>10</strong></td><td><strong>1m</strong></td><td><span class="tag organic">ORGANIC</span> Google</td><td>&mdash;</td><td>May 5, 2026, 11:35 PM</td><td>Denver, CO</td><td>/ &rarr; /</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-      </tbody>
-    </table>
-  </div>
+<h2>All Real Conversions (28)</h2>
+<div class="desc">Same 28 conversions across all 3 snapshots (no new conversions occurred May 9-11). Filterable by source. 7 thank-you-page revisits excluded.</div>
+<div class="tabs">
+<button class="tab active" onclick="filterConv(this,'all')">All (28)</button>
+<button class="tab" onclick="filterConv(this,'paid')">Paid (9)</button>
+<button class="tab" onclick="filterConv(this,'organic')">Organic (12)</button>
+<button class="tab" onclick="filterConv(this,'direct')">Direct (5)</button>
+<button class="tab" onclick="filterConv(this,'referral')">Referral (2)</button>
+</div>
+<div class="scroll">
+<table id="convTable">
+<thead><tr><th>Source</th><th>Date</th><th>Origin</th><th>Search Term</th><th>Landing</th><th>Location</th><th>Time</th><th>LO</th></tr></thead>
+<tbody><tr data-bucket="direct"><td><span class="tag direct">Direct</span></td><td>May 8 2026, 6:54 am</td><td>Direct Link</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1778203448478-672c7d600eb1894c" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>May 6 2026, 9:53 pm</td><td>Google</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>3m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1778084589771-2bae56bf4916a0cd" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="referral"><td><span class="tag referral">Referral</span></td><td>May 6 2026, 12:48 am</td><td>app.hvacree.net</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1778008718378-c92e6224ba274d80" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>May 5 2026, 11:35 pm</td><td>Google</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1778004305556-1224cd7c02ef5059" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>May 4 2026, 10:06 pm</td><td>Google PPC</td><td>insulation removal</td><td>/</td><td>Denver, Colorado</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777912563822-c39fd89c24f986a4" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>May 3 2026, 5:41 am</td><td>DuckDuckGo</td><td>&mdash;</td><td>/arvada-insulation-removal/</td><td>Denver, Colorado</td><td>12m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777767064028-8137ff9426550bfa" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>May 2 2026, 3:02 am</td><td>Google</td><td>&mdash;</td><td>/resource/best-insulation-for-attics/</td><td>Highlands Ranch, Colorado</td><td>7m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777671171381-b647cb3c9eea21e5" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>May 1 2026, 2:41 am</td><td>Google</td><td>&mdash;</td><td>/</td><td>Selma, North Carolina</td><td>59s</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777583471996-cd4a5c48978b335b" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 28 2026, 2:35 am</td><td>Google</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777323949019-bb0c3b626d174ccd" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 28 2026, 1:51 am</td><td>Google PPC</td><td>insulation contractors denver</td><td>/</td><td>Denver, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777321286888-6823a40083367922" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="direct"><td><span class="tag direct">Direct</span></td><td>Apr 27 2026, 6:15 pm</td><td>Direct Link</td><td>&mdash;</td><td>/denver-attic-insulation/</td><td>Denver, Colorado</td><td>9m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1777293952198-d1f477c0ef0e3fac" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 24 2026, 5:48 am</td><td>Google</td><td>&mdash;</td><td>/spray-foam-insulation/</td><td>Houston, Texas</td><td>6m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776989929370-cd4b520cbf5de5d7" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 23 2026, 8:27 pm</td><td>Google PPC</td><td>insulation removal</td><td>/</td><td>Castle Rock, Colorado</td><td>18m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776956253630-0d9c94a821990d08" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 23 2026, 5:20 am</td><td>Bing</td><td>&mdash;</td><td>/boulder-pest-control-insulation/</td><td>Denver, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776901809389-e040442e55408158" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 22 2026, 7:17 pm</td><td>Google PPC</td><td>insulation companies denver</td><td>/</td><td>Denver, Colorado</td><td>3m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776865621411-36fc0daedcf6e62d" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 22 2026, 12:45 am</td><td>Google</td><td>&mdash;</td><td>/</td><td>Lakewood, Colorado</td><td>2m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776798916236-b62fb35a5ed66ad1" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="referral"><td><span class="tag referral">Referral</span></td><td>Apr 20 2026, 5:32 am</td><td>m.yelp.com</td><td>&mdash;</td><td>/</td><td>Aurora, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776643339585-c39f0197337d70dc" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 19 2026, 7:40 am</td><td>Google</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>3m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776564604161-7525d6029873b0eb" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 18 2026, 2:52 am</td><td>Google PPC</td><td>home insulation services</td><td>/</td><td>Arvada, Colorado</td><td>17m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776460929280-caf7505028233420" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 17 2026, 6:56 pm</td><td>Google</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>2m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776432395939-161ae3d3d4da6031" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 16 2026, 11:48 pm</td><td>Google PPC</td><td>home insulation services denver</td><td>/</td><td>Aurora, Colorado</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776363536096-391fa9fb1c0612b1" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 16 2026, 10:25 pm</td><td>Google PPC</td><td>home insulation services</td><td>/</td><td>Denver, Colorado</td><td>3m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776358554873-fa6334749aae16e4" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="direct"><td><span class="tag direct">Direct</span></td><td>Apr 16 2026, 8:10 pm</td><td>Direct Link</td><td>&mdash;</td><td>/</td><td>Denver, Colorado</td><td>5m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776350441506-6823ecf43a4fec29" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="direct"><td><span class="tag direct">Direct</span></td><td>Apr 15 2026, 9:07 pm</td><td>Direct Link</td><td>&mdash;</td><td>/</td><td>Parker, Colorado</td><td>4m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776267430277-4fb3b27e9a345e31" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="direct"><td><span class="tag direct">Direct</span></td><td>Apr 15 2026, 5:41 pm</td><td>Direct Link</td><td>&mdash;</td><td>/</td><td>Orem, Utah</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776255102966-e0a7f92b0e6770a7" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 14 2026, 9:06 pm</td><td>Google PPC</td><td>spray foam insulation for houses</td><td>/denver-spray-foam-insulation/</td><td>, Colorado</td><td>1m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776180975749-abe1e61f7be7b9b5" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="organic"><td><span class="tag organic">Organic</span></td><td>Apr 14 2026, 2:34 am</td><td>Google</td><td>&mdash;</td><td>/</td><td>Broomfield, Colorado</td><td>4m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776114252527-404b430709da0d98" target="_blank">&#9654; Play</a></td></tr><tr data-bucket="paid"><td><span class="tag paid">Paid</span></td><td>Apr 13 2026, 8:10 pm</td><td>Google PPC</td><td>attic insulation near me</td><td>/denver-attic-insulation/</td><td>Erie, Colorado</td><td>6m</td><td><a class="play" href="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-1776091230386-7a1d0a31825dbf1f" target="_blank">&#9654; Play</a></td></tr></tbody>
+</table>
+</div>
 </div>
 
 <div class="section">
-  <h2>All 23 LO Thank-You Sessions</h2>
-  <div class="desc">Every Lucky Orange session tagged &ldquo;Thank-You&rdquo;. Filter by classification: paid, organic, direct, referral, or revisit (excluded from real conversions).</div>
-  <div class="tabs">
-    <button class="tab active" onclick="filterTY(this,'all')">All (23)</button>
-    <button class="tab" onclick="filterTY(this,'paid')">Paid (1)</button>
-    <button class="tab" onclick="filterTY(this,'organic')">Organic (5)</button>
-    <button class="tab" onclick="filterTY(this,'direct')">Direct (2)</button>
-    <button class="tab" onclick="filterTY(this,'referral')">Referral (2)</button>
-    <button class="tab" onclick="filterTY(this,'revisit')">Revisits (13)</button>
-  </div>
-  <div class="scroll">
-    <table id="tyTable">
-      <thead><tr><th>Class</th><th>Source</th><th>Term</th><th>Date</th><th>Time</th><th>Location</th><th>Landing &rarr; Exit</th><th>Visits</th><th>Recording</th></tr></thead>
-      <tbody>
-<tr data-cls="direct"><td><span class="tag direct">DIRECT</span></td><td>Direct Link</td><td>&mdash;</td><td>May 8, 2026</td><td>1m</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="organic"><td><span class="tag organic">ORGANIC</span></td><td>Google</td><td>&mdash;</td><td>May 6, 2026</td><td>3m</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>May 6, 2026</td><td>3s</td><td>Denver, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>2</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="referral"><td><span class="tag referral">REFERRAL</span></td><td>app.hvacree.net</td><td>&mdash;</td><td>May 6, 2026</td><td>5m</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="organic"><td><span class="tag organic">ORGANIC</span></td><td>Google</td><td>&mdash;</td><td>May 5, 2026</td><td>1m</td><td>Denver, CO</td><td>/ &rarr; /</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>May 2, 2026</td><td>4s</td><td>Highlands Ranch, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>3</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>May 2, 2026</td><td>3s</td><td>Parker, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>2</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="organic"><td><span class="tag organic">ORGANIC</span></td><td>Google</td><td>&mdash;</td><td>May 2, 2026</td><td>7m</td><td>Highlands Ranch, CO</td><td>/resource/best-insulation-for-attics/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 28, 2026</td><td>5s</td><td>Denver, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>2</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="paid"><td><span class="tag paid">PAID</span></td><td>Google PPC</td><td>insulation removal</td><td>Apr 23, 2026</td><td>18m</td><td>Castle Rock, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="organic"><td><span class="tag organic">ORGANIC</span></td><td>Bing</td><td>&mdash;</td><td>Apr 23, 2026</td><td>5m</td><td>Denver, CO</td><td>/boulder-pest-control-insulation/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 22, 2026</td><td>6s</td><td>Denver, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>2</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 22, 2026</td><td>-</td><td>Lakewood, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>3</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 22, 2026</td><td>7s</td><td>Denver, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>2</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="referral"><td><span class="tag referral">REFERRAL</span></td><td>m.yelp.com</td><td>&mdash;</td><td>Apr 20, 2026</td><td>5m</td><td>Aurora, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="organic"><td><span class="tag organic">ORGANIC</span></td><td>Google</td><td>&mdash;</td><td>Apr 19, 2026</td><td>3m</td><td>Denver, CO</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="direct"><td><span class="tag direct">DIRECT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 15, 2026</td><td>1m</td><td>Orem, UT</td><td>/ &rarr; /thank-you/</td><td>1</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 11, 2026</td><td>6s</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>9</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 11, 2026</td><td>6s</td><td>Denver, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>8</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 10, 2026</td><td>15m</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>7</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 10, 2026</td><td>11s</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>6</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 10, 2026</td><td>7s</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>5</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-<tr data-cls="revisit"><td><span class="tag revisit">REVISIT</span></td><td>Direct Link</td><td>&mdash;</td><td>Apr 10, 2026</td><td>6s</td><td>Littleton, CO</td><td>/thank-you/ &rarr; /thank-you/</td><td>4</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open</a></td></tr>
-      </tbody>
-    </table>
-  </div>
+<h2>CallTrackingMetrics Calls</h2>
+<div class="desc"><span id="ctm-desc">609 total calls in 30-day window ending May 11 (carry-forward from May 9 build &mdash; CTM tab logged out at refresh)</span>. Per-call detail requires CTM authentication &mdash; <a href="https://app.calltrackingmetrics.com/login" target="_blank">sign in here</a>.</div>
+<div class="kpis" style="margin-bottom:0">
+<div class="kpi"><div class="kpi-label">Total Calls (30d)</div><div class="kpi-value" id="ctm-total">609</div><div class="kpi-sub" id="ctm-total-sub">From May 9 daily build</div></div>
+<div class="kpi"><div class="kpi-label">Source Breakdown</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Requires CTM login</div></div>
+<div class="kpi"><div class="kpi-label">Spam Filter</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Calls &lt;60s, OOA</div></div>
+<div class="kpi"><div class="kpi-label">Routing</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Destination breakdown</div></div>
+</div>
+<div style="background:#0f172a;border:1px dashed #334155;border-radius:8px;padding:16px;margin-top:12px;text-align:center;color:#64748b;font-size:12px">
+&#9432; Once CTM is authenticated in the connected Chrome, this section will populate with per-call detail: caller phone (masked), source classification (organic / paid / referral / direct), duration, datetime, status, and routing destination &mdash; same way WP form leads are shown above.
+</div>
 </div>
 
 <div class="section">
-  <h2>CTM Calls (sample of 14 most-recent)</h2>
-  <div class="desc">Most-recent visible calls from the CallTrackingMetrics queue. Filter by source classification or status. Calls under 60 seconds are flagged as likely spam.</div>
-  <div class="tabs">
-    <button class="tab active" onclick="filterCTM(this,'all')">All</button>
-    <button class="tab" onclick="filterCTM(this,'organic')">Organic</button>
-    <button class="tab" onclick="filterCTM(this,'gbp')">GBP</button>
-    <button class="tab" onclick="filterCTM(this,'short_call')">&lt;60s (spam)</button>
-    <button class="tab" onclick="filterCTM(this,'answered')">Answered</button>
-    <button class="tab" onclick="filterCTM(this,'no_answer')">No answer</button>
-  </div>
-  <div class="scroll">
-    <table id="ctmTable">
-      <thead><tr><th>Caller</th><th>Location</th><th>Source</th><th>Source Class</th><th>Audio</th><th>Date / Time</th><th>Status</th><th>Spam?</th></tr></thead>
-      <tbody>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Frederick Jones</td><td>Plainfield, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:56</td><td>Fri May 8th 10:15 AM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-<tr data-src="gbp" data-status="no_answer" data-spam="short_call"><td>Wireless Caller</td><td>Marina Del Rey, CA</td><td>(GBP) Aurora</td><td><span class="tag gbp">GBP</span> (gbp) aurora voicemail</td><td>00:09</td><td>Thu May 7th 02:33 PM</td><td><span class="tag no_answer">No answer</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Wireless Caller</td><td>Westminster, CO</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:56</td><td>Thu May 7th 10:32 AM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Tayler Justin</td><td>Denver, CO</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>01:15</td><td>Wed May 6th 10:42 AM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="short_call"><td>Wireless Caller</td><td>Denver, CO</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:43</td><td>Wed May 6th 11:21 AM</td><td><span class="tag answered">Answered</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="short_call"><td>Bonomo, James</td><td>Knoxville, TN</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:14</td><td>Fri May 8th 02:36 PM</td><td><span class="tag answered">Answered</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="short_call"><td>Wireless Caller</td><td>Salina, KS</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:43</td><td>Wed May 6th 11:21 AM</td><td><span class="tag answered">Answered</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>01:52</td><td>Tue May 5th 11:06 AM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-<tr data-src="gbp" data-status="no_answer" data-spam="short_call"><td>Sacramento Ca</td><td>Sacramento, CA</td><td>(GBP) Fort Collins</td><td><span class="tag gbp">GBP</span> (gbp) fort collins voicemail</td><td>00:12</td><td>Tue May 5th 11:00 AM</td><td><span class="tag no_answer">No answer</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>01:40</td><td>Mon May 4th 04:15 PM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="short_call"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:12</td><td>Mon May 4th 02:05 PM</td><td><span class="tag answered">Answered</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="no_answer" data-spam="short_call"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:04</td><td>Mon May 4th 12:30 PM</td><td><span class="tag no_answer">No answer</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="short_call"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>00:47</td><td>Mon May 4th 12:29 PM</td><td><span class="tag answered">Answered</span></td><td><span class="tag short_call">SHORT</span></td></tr>
-<tr data-src="organic" data-status="answered" data-spam="real"><td>Brendan Benecke</td><td>Freehold, NJ</td><td>Google Organic</td><td><span class="tag organic">ORGANIC</span> organic / google</td><td>11:54</td><td>Mon May 4th 12:05 PM</td><td><span class="tag answered">Answered</span></td><td><span style="color:#6ee7b7">&#10003; Real</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div style="margin-top:8px;font-size:10px;color:#64748b">Total 30-day calls: 609. Sample reflects most-recent 40; full enumeration not performed (CTM lazy-loads the rest on scroll).</div>
+<h2>WP Form Leads</h2>
+<div class="desc">Gravity Forms (id=2) &middot; <span id="wp-desc">36 entries through May 11: 19 qualified, 15 OOA, 2 invalid</span>.</div>
+<div class="tabs">
+<button class="tab active" onclick="filterLead(this,'all')">All (<span id="ft-all">36</span>)</button>
+<button class="tab" onclick="filterLead(this,'qualified')">Qualified (19)</button>
+<button class="tab" onclick="filterLead(this,'out_of_area')">Out-of-Area (15)</button>
+<button class="tab" onclick="filterLead(this,'invalid_phone')">Invalid (<span id="ft-invalid">2</span>)</button>
+</div>
+<div class="scroll">
+<table id="leadTable">
+<thead><tr><th>Status</th><th>Date</th><th>Name (initials)</th><th>Phone</th><th>Service</th><th>Source URL</th></tr></thead>
+<tbody><tr class="may11-only" data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>May 11, 1:08 PM</td><td>D.K.</td><td>555-***-5555</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:25 PM</td><td>J.R.</td><td>720-***-8592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:03 AM</td><td>K.P.</td><td>970-***-2848</td><td>Spray Foam Insulation</td><td>/spray-foam-insulation</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 6, 3:13 PM</td><td>T.L.</td><td>630-***-0220</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 6, 9:25 AM</td><td>D.J.</td><td>720-***-2514</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 12:24 PM</td><td>R.B.</td><td>303-***-9347</td><td>Pest Control Insulation</td><td>/pest-control-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 11:06 AM</td><td>T.M.</td><td>303-***-1037</td><td>Crawl Space Encapsulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 5, 8:26 AM</td><td>I.S.</td><td>647-***-3374</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 4, 9:37 AM</td><td>D.R.</td><td>720-***-7067</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 2, 5:23 PM</td><td>D.N.</td><td>303-***-2417</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 2, 1:14 PM</td><td>M.C.</td><td>786-***-2678</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 1, 2:39 PM</td><td>F.S.</td><td>303-***-8254</td><td>Attic Insulation</td><td>/best-insulation-for-attics</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 1, 6:11 AM</td><td>D.H.</td><td>561-***-5431</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 30, 2:12 PM</td><td>B.B.</td><td>303-***-4209</td><td>Commercial Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 30, 12:31 PM</td><td>S.V.</td><td>408-***-6191</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 2:11 PM</td><td>P.H.</td><td>720-***-0455</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 1:25 PM</td><td>F.B.</td><td>303-***-9366</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 27, 5:46 AM</td><td>D.S.V.</td><td>434-***-3976</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>Apr 25, 9:26 PM</td><td>B.F.</td><td>***</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 23, 5:25 PM</td><td>J.S.</td><td>805-***-3873</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 23, 8:11 AM</td><td>C.L.O.</td><td>303-***-4586</td><td>Insulation Removal</td><td>/attic-sealing</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 4:55 PM</td><td>E.B.</td><td>563-***-9859</td><td>Insulation Removal</td><td>/insulation-removal-services</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 6:49 AM</td><td>T.K.</td><td>941-***-2139</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 21, 12:17 PM</td><td>D.L.</td><td>313-***-1339</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 20, 1:37 AM</td><td>J.A.</td><td>966-***-8593</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 18, 7:13 PM</td><td>D.</td><td>303-***-8083</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 17, 2:37 PM</td><td>B.D.</td><td>720-***-1192</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 17, 6:29 AM</td><td>R.A.</td><td>323-***-5904</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 11:19 AM</td><td>S.A.R.</td><td>720-***-3592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 16, 9:57 AM</td><td>M.P.</td><td>361-***-1819</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 7:45 AM</td><td>J.R.</td><td>303-***-6789</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 15, 8:38 AM</td><td>B.W.</td><td>303-***-0468</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 14, 8:37 AM</td><td>C.Q.</td><td>858-***-8388</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 2:07 PM</td><td>S.H.</td><td>720-***-2987</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 13, 8:18 AM</td><td>G.B.</td><td>314-***-9062</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 7:46 AM</td><td>P.K.</td><td>303-***-6563</td><td>Attic Insulation</td><td>/contact</td></tr></tbody>
+</table>
+</div>
 </div>
 
 <div class="section">
-  <h2>Search Terms That Drove Verified Paid Conversions</h2>
-  <div class="desc">Only Google PPC sessions with utm_term set whose LO tag is Thank-You and landing &ne; /thank-you/.</div>
-  <div class="scroll">
-    <table>
-      <thead><tr><th>Search Term</th><th>Date</th><th>Location</th><th>Time</th><th>Landing &rarr; Exit</th><th>LO Recording</th></tr></thead>
-      <tbody>
-        <tr><td><strong>insulation removal</strong></td><td>Apr 23, 8:27 PM</td><td>Castle Rock, Colorado</td><td>18m</td><td>/ &rarr; /thank-you/</td><td><a class="btn-link" href="https://classic.luckyorange.com/v3/dash.php#/recordings" target="_blank">Open in LO</a></td></tr>
-      </tbody>
-    </table>
-  </div>
+<h2>Recommendations</h2>
+<div class="desc" id="rec-desc">Snapshot for May 11, 2026.</div>
+<div class="rec good">
+<h3 id="rec1-title">1. Paid CR 5.20% on 173 paid sessions.</h3>
+<p id="rec1-body">9 verified paid conversions. Top-converting terms: home insulation services (2), insulation removal (2), spray foam insulation for houses (1), insulation contractors denver (1), insulation companies denver (1), home insulation services denver (1), attic insulation near me (1).</p>
 </div>
-
-<div class="section">
-  <h2>WordPress Form Leads (35 in 30 days)</h2>
-  <div class="desc">Filter by status. CO area codes (303/720/970/719) are qualified.</div>
-  <div class="tabs">
-    <button class="tab active" onclick="filterLead(this,'all')">All (35)</button>
-    <button class="tab" onclick="filterLead(this,'qualified')">Qualified (19)</button>
-    <button class="tab" onclick="filterLead(this,'out_of_area')">OOA (15)</button>
-    <button class="tab" onclick="filterLead(this,'invalid_phone')">Invalid (1)</button>
-  </div>
-  <div class="scroll">
-    <table id="leadTable">
-      <thead><tr><th>Status</th><th>Date</th><th>Initials</th><th>Phone</th><th>Service</th><th>Source URL</th></tr></thead>
-      <tbody>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:25 PM</td><td>J.R.</td><td>720-***-8592</td><td>Blown-In Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:03 AM</td><td>K.P.</td><td>970-***-2848</td><td>Spray Foam Insulation</td><td>/spray-foam-insulation</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 6, 3:13 PM</td><td>T.L.</td><td>630-***-0220</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 6, 9:25 AM</td><td>D.J.</td><td>720-***-2514</td><td>Spray Foam Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 12:24 PM</td><td>R.B.</td><td>303-***-9347</td><td>Pest Control Insulation</td><td>/pest-control-insulation</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 11:06 AM</td><td>T.M.</td><td>303-***-1037</td><td>Crawl Space Encapsulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 5, 8:26 AM</td><td>I.S.</td><td>647-***-3374</td><td>Blown-In Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 4, 9:37 AM</td><td>D.R.</td><td>720-***-7067</td><td>Insulation Removal</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 2, 5:23 PM</td><td>D.N.</td><td>303-***-2417</td><td>Insulation Removal</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 2, 1:14 PM</td><td>M.C.</td><td>786-***-2678</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 1, 2:39 PM</td><td>F.S.</td><td>303-***-8254</td><td>Attic Insulation</td><td>/best-insulation-for-attics</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 1, 6:11 AM</td><td>D.H.</td><td>561-***-5431</td><td>Spray Foam Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 30, 2:12 PM</td><td>B.B.</td><td>303-***-4209</td><td>Commercial Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 30, 12:31 PM</td><td>S.V.</td><td>408-***-6191</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 2:11 PM</td><td>P.H.</td><td>720-***-0455</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 1:25 PM</td><td>F.B.</td><td>303-***-9366</td><td>Insulation Removal</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 27, 5:46 AM</td><td>D.S.V.</td><td>434-***-3976</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>Apr 25, 9:26 PM</td><td>B.F.</td><td>***</td><td>Spray Foam Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 23, 5:25 PM</td><td>J.S.</td><td>805-***-3873</td><td>Spray Foam Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 23, 8:11 AM</td><td>C.O.</td><td>303-***-4586</td><td>Insulation Removal</td><td>/attic-sealing</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 4:55 PM</td><td>E.B.</td><td>563-***-9859</td><td>Insulation Removal</td><td>/insulation-removal-services</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 6:49 AM</td><td>T.K.</td><td>941-***-2139</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 21, 12:17 PM</td><td>D.L.</td><td>313-***-1339</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 20, 1:37 AM</td><td>J.A.</td><td>966-***-8593</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 18, 7:13 PM</td><td>D.</td><td>303-***-8083</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 17, 2:37 PM</td><td>B.D.</td><td>720-***-1192</td><td>Blown-In Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 17, 6:29 AM</td><td>R.A.</td><td>323-***-5904</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 11:19 AM</td><td>S.A.R.</td><td>720-***-3592</td><td>Blown-In Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 16, 9:57 AM</td><td>M.P.</td><td>361-***-1819</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 7:45 AM</td><td>J.R.</td><td>303-***-6789</td><td>Other / Not Sure</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 15, 8:38 AM</td><td>B.W.</td><td>303-***-0468</td><td>Blown-In Insulation</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 14, 8:37 AM</td><td>C.Q.</td><td>858-***-8388</td><td>Spray Foam Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 2:07 PM</td><td>S.H.</td><td>720-***-2987</td><td>Insulation Removal</td><td>/contact</td></tr>
-<tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 13, 8:18 AM</td><td>G.B.</td><td>314-***-9062</td><td>Attic Insulation</td><td>/contact</td></tr>
-<tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 7:46 AM</td><td>P.K.</td><td>303-***-6563</td><td>Attic Insulation</td><td>/contact</td></tr>
-      </tbody>
-    </table>
-  </div>
+<div class="rec good">
+<h3 id="rec2-title">2. Organic still leading on conversion volume (12 of 28).</h3>
+<p id="rec2-body">Organic Google + Bing + DuckDuckGo drove 12 verified conversions across 350 sessions &mdash; 3.43% CR. Resource pages (/resource/best-insulation-for-attics/, /arvada-insulation-removal/, /boulder-pest-control-insulation/) continue to convert.</p>
 </div>
-
-<div class="section">
-  <h2>Recommendations</h2>
-  <div class="desc">Ranked by impact on paid conversion rate.</div>
-  <div class="rec bad"><h3>1. Paid CR collapsed 5.59% &rarr; 0.61% &mdash; investigate Google Ads change history.</h3><p>Only 1 verified paid conversion this period (down from 9). Pull bid changes on Search-LU-Denver, verify form fires the LO Thank-You tag, audit landing-page form for regression.</p></div>
-  <div class="rec warn"><h3>2. 43% of WP leads out-of-area &mdash; add Colorado ZIP gating.</h3><p>15 of 35 leads have non-CO area codes. Add ZIP filter on form, validate against 802xx&ndash;808xx prefixes.</p></div>
-  <div class="rec warn"><h3>3. 78% of CTM calls under 60s (likely spam) &mdash; block known spam routes.</h3><p>Sample of 40 most-recent calls shows heavy short-call ratio. Many GBP-Aurora and GBP-Fort Collins voicemails. Consider call-blocking rules in CTM for repeat short-call IPs/numbers.</p></div>
-  <div class="rec warn"><h3>4. 13 thank-you-page revisits inflate totals if not deduped.</h3><p>Apr 10&ndash;11 cluster of 6 revisits all from Littleton/Denver suggests one user repeatedly opening /thank-you/. Keep landing!=/thank-you/ filter.</p></div>
-  <div class="rec"><h3>5. Direct-Link traffic 328 sessions (40%) &mdash; strong brand recall.</h3><p>Continue brand content, GBP freshness, NAP consistency. Consider branded-search campaign to defend SERPs.</p></div>
-  <div class="rec"><h3>6. Organic generated 5 of 10 verified conversions &mdash; expand resource pages.</h3><p>One conversion from /resource/best-insulation-for-attics/ (7m on site), another from /boulder-pest-control-insulation/ via Bing.</p></div>
+<div class="rec warn">
+<h3>3. 7 thank-you-page revisits excluded.</h3>
+<p>Without exclusion, total conversions would inflate from 28 to 35. Keep the dedup filter (landing != /thank-you/).</p>
 </div>
-
-<div class="section">
-  <h2>Historical Reports / Archive</h2>
-  <div class="desc">Each scheduled daily run saves a snapshot HTML. Click any date to open that day&#39;s frozen dashboard.</div>
-  <div class="archive-list" id="archiveList">
-    <div class="archive-item"><span class="archive-date">May 9, 2026 (today, live)</span><a href="dashboard_v7.html">Current Dashboard</a></div>
-    <div class="archive-item"><span class="archive-date">May 9, 2026</span><a href="archive/dashboard_2026-05-09.html">Snapshot 2026-05-09</a></div>
-  </div>
-  <div style="margin-top:10px;font-size:10px;color:#64748b">Future daily runs will append to this list automatically. Archive files are stored at <code>/archive/dashboard_YYYY-MM-DD.html</code>.</div>
+<div class="rec">
+<h3 id="rec4-title">4. Direct-Link traffic at 217 sessions (28% of total).</h3>
+<p>Brand recall holding. Continue brand-driven content, GBP freshness, NAP consistency.</p>
+</div>
+<div class="rec warn">
+<h3>5. CTM call-tracking carried forward from May 9 build.</h3>
+<p>The May 9 daily build captured <strong>609 total calls</strong> across the prior 30-day window (sample-aggregated). CTM tab has been logged out at every refresh since, so the May 10 and May 11 snapshots reuse the same figure. To get fresh per-day call counts, re-authenticate <a href="https://app.calltrackingmetrics.com/login" target="_blank">CTM</a> in the connected Chrome.</p>
+</div>
 </div>
 
 <div class="footer">
-  Data refresh: Lucky Orange (827 sessions, 9 pages) &middot; Gravity Forms (35 entries, form id=2) &middot; CTM (609 calls, 40 sampled) &middot; Google Ads (Search-LU-Denver, ocid 1561208626).
-</div>
+<span id="ft-text">Snapshot: May 11, 2026 &middot; Lucky Orange (769 sessions, Apr 12 &ndash; May 11) &middot; Gravity Forms (36 entries) &middot; CTM not included &middot; Google Ads (Search-LU-Denver, ocid 1561208626).</span>
 </div>
 
+</div>
 <script>
-document.getElementById('genTime').textContent = new Date().toISOString().slice(0,16).replace('T',' ') + ' UTC (May 9, 2026 daily build)';
+const DATA = {
+  '2026-05-09': {
+    label: 'May 9, 2026', window: 'Apr 12 – May 9',
+    total: 695, paidS: 160, tagged: 35, paidCR: '5.63',
+    orgS: 305, orgCR: '3.93', dirS: 202, dirCR: '2.48', refS: 21, paidS_b: 160, paidCR_b: '5.63',
+    barOrg: 100.0, barDir: 66.2, barPaid: 52.5, barRef: 6.9,
+    noConv: 151, noPct: '94.4', crA: '5.63',
+    wpTotal: 35, wpInvalid: 1, wpDesc: '35 entries through May 9: 19 qualified, 15 OOA, 1 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · live from May 9 build',
+    dirPct: 29, ftText: 'Snapshot: May 9, 2026 · Lucky Orange (695 sessions, Apr 12 – May 9) · Gravity Forms (35 entries) · CallTrackingMetrics (609 calls, May 9 build) · Google Ads (Search-LU-Denver, ocid 1561208626).'
+  },
+  '2026-05-10': {
+    label: 'May 10, 2026', window: 'Apr 12 – May 10',
+    total: 743, paidS: 163, tagged: 35, paidCR: '5.52',
+    orgS: 344, orgCR: '3.49', dirS: 208, dirCR: '2.40', refS: 21, paidS_b: 163, paidCR_b: '5.52',
+    barOrg: 100.0, barDir: 60.5, barPaid: 47.4, barRef: 6.1,
+    noConv: 154, noPct: '94.5', crA: '5.52',
+    wpTotal: 35, wpInvalid: 1, wpDesc: '35 entries through May 10: 19 qualified, 15 OOA, 1 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9',
+    dirPct: 28, ftText: 'Snapshot: May 10, 2026 · Lucky Orange (743 sessions, Apr 12 – May 10) · Gravity Forms (35 entries) · CallTrackingMetrics (609 calls, carry-forward) · Google Ads (Search-LU-Denver, ocid 1561208626).'
+  },
+  '2026-05-11': {
+    label: 'May 11, 2026', window: 'Apr 12 – May 11',
+    total: 769, paidS: 173, tagged: 35, paidCR: '5.20',
+    orgS: 350, orgCR: '3.43', dirS: 217, dirCR: '2.30', refS: 21, paidS_b: 173, paidCR_b: '5.20',
+    barOrg: 100.0, barDir: 62.0, barPaid: 49.4, barRef: 6.0,
+    noConv: 164, noPct: '94.8', crA: '5.20',
+    wpTotal: 36, wpInvalid: 2, wpDesc: '36 entries through May 11: 19 qualified, 15 OOA, 2 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9',
+    dirPct: 28, ftText: 'Snapshot: May 11, 2026 · Lucky Orange (769 sessions, Apr 12 – May 11) · Gravity Forms (36 entries) · CallTrackingMetrics (609 calls, carry-forward) · Google Ads (Search-LU-Denver, ocid 1561208626).'
+  }
+};
 
-// Period tabs (currently scope only re-labels period, all data is 30-day)
-document.querySelectorAll('#periodTabs .period-tab').forEach(b => b.addEventListener('click', e => {
-  document.querySelectorAll('#periodTabs .period-tab').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  const days = b.getAttribute('data-days');
-  const lbl = document.getElementById('periodLabel');
-  if (days === '7') lbl.textContent = 'May 2 to May 9, 2026 (7-day rolling, partial data)';
-  else if (days === '14') lbl.textContent = 'Apr 25 to May 9, 2026 (14-day rolling, partial data)';
-  else lbl.textContent = 'April 9, 2026 to May 9, 2026 (30-day rolling)';
-}));
-
-function loadArchive(){
-  const d = document.getElementById('datePicker').value;
-  if (!d) return;
-  window.location.href = 'archive/dashboard_' + d + '.html';
+function setDate(d) {
+  if (!DATA[d]) return;
+  location.hash = d;
 }
 
-function filterTY(btn,cls){
-  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#tyTable tbody tr').forEach(r=>{r.style.display=(cls==='all'||r.getAttribute('data-cls')===cls)?'':'none';});
+function applyDate(d) {
+  const x = DATA[d];
+  if (!x) return;
+  // Day badge
+  document.getElementById('dayBadge').textContent = 'Snapshot: ' + x.label;
+  // Body class controls May 11-only rows
+  document.body.classList.remove('day-2026-05-09', 'day-2026-05-10', 'day-2026-05-11');
+  document.body.classList.add('day-' + d);
+  // Active button
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.toggle('active', b.dataset.date === d));
+  // KPIs
+  document.getElementById('kpi-total').textContent = x.total;
+  document.getElementById('kpi-total-sub').textContent = x.window;
+  document.getElementById('kpi-paidS').textContent = x.paidS;
+  document.getElementById('kpi-tagged').textContent = x.tagged;
+  document.getElementById('kpi-paidCR').textContent = x.paidCR;
+  document.getElementById('kpi-wp').textContent = x.wpTotal;
+  document.getElementById('kpi-wp-sub').textContent = '19 qual · 15 OOA · ' + x.wpInvalid + ' invalid';
+  document.getElementById('kpi-ctm').textContent = x.ctm;
+  document.getElementById('kpi-ctm-sub').textContent = x.ctmSub;
+  // CTM section
+  const ctmEra = (d === '2026-05-09') ? 'live from May 9 build' : 'carry-forward from May 9 build (CTM tab logged out at refresh)';
+  document.getElementById('ctm-desc').textContent = x.ctm + ' total calls in 30-day window ending ' + x.label.replace(', 2026','') + ' (' + ctmEra + ')';
+  document.getElementById('ctm-total').textContent = x.ctm;
+  document.getElementById('ctm-total-sub').textContent = (d === '2026-05-09') ? 'From May 9 daily build' : 'Carry-forward from May 9 (no live refresh)';
+  // Source bars
+  document.getElementById('sb-total').textContent = x.total;
+  document.getElementById('sb-orgS').textContent = x.orgS;
+  document.getElementById('sb-orgCR').textContent = x.orgCR;
+  document.getElementById('sb-dirS').textContent = x.dirS;
+  document.getElementById('sb-dirCR').textContent = x.dirCR;
+  document.getElementById('sb-paidS').textContent = x.paidS_b;
+  document.getElementById('sb-paidCR').textContent = x.paidCR_b;
+  document.getElementById('sb-refS').textContent = x.refS;
+  document.getElementById('bar-org').style.width = x.barOrg + '%';
+  document.getElementById('bar-dir').style.width = x.barDir + '%';
+  document.getElementById('bar-paid').style.width = x.barPaid + '%';
+  document.getElementById('bar-ref').style.width = x.barRef + '%';
+  // Funnel
+  document.getElementById('fn-paidS').textContent = x.paidS;
+  document.getElementById('fn-noConv').textContent = x.noConv;
+  document.getElementById('fn-noPct').textContent = x.noPct;
+  document.getElementById('fn-crA').textContent = x.crA;
+  document.getElementById('fn-crB').textContent = x.crA;
+  // WP description & filter counts
+  document.getElementById('wp-desc').textContent = x.wpDesc;
+  document.getElementById('ft-all').textContent = x.wpTotal;
+  document.getElementById('ft-invalid').textContent = x.wpInvalid;
+  // Recommendations
+  document.getElementById('rec-desc').textContent = 'Snapshot for ' + x.label + '.';
+  document.getElementById('rec1-title').textContent = '1. Paid CR ' + x.paidCR + '% on ' + x.paidS + ' paid sessions.';
+  document.getElementById('rec2-body').textContent = 'Organic Google + Bing + DuckDuckGo drove 12 verified conversions across ' + x.orgS + ' sessions — ' + x.orgCR + '% CR. Resource pages (/resource/best-insulation-for-attics/, /arvada-insulation-removal/, /boulder-pest-control-insulation/) continue to convert.';
+  document.getElementById('rec4-title').textContent = '4. Direct-Link traffic at ' + x.dirS + ' sessions (' + x.dirPct + '% of total).';
+  // Footer
+  document.getElementById('ft-text').textContent = x.ftText;
 }
-function filterCTM(btn,key){
-  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+
+function getDateFromHash() {
+  const h = location.hash.slice(1);
+  return DATA[h] ? h : '2026-05-11';
+}
+
+function filterConv(btn, b) {
+  const tabs = btn.parentNode.querySelectorAll('.tab');
+  tabs.forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#ctmTable tbody tr').forEach(r=>{
-    if (key==='all'){r.style.display='';return;}
-    const src=r.getAttribute('data-src'),status=r.getAttribute('data-status'),spam=r.getAttribute('data-spam');
-    r.style.display=(src===key||status===key||spam===key)?'':'none';
+  document.querySelectorAll('#convTable tbody tr').forEach(tr => {
+    tr.style.display = (b==='all' || tr.dataset.bucket===b) ? '' : 'none';
   });
 }
-function filterLead(btn,status){
-  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+function filterLead(btn, st) {
+  const tabs = btn.parentNode.querySelectorAll('.tab');
+  tabs.forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#leadTable tbody tr').forEach(r=>{r.style.display=(status==='all'||r.getAttribute('data-status')===status)?'':'none';});
+  document.querySelectorAll('#leadTable tbody tr').forEach(tr => {
+    // Respect both data-status AND may11-only class visibility
+    const dayHidden = tr.classList.contains('may11-only') && !document.body.classList.contains('day-2026-05-11');
+    if (dayHidden) { tr.style.display = 'none'; return; }
+    tr.style.display = (st==='all' || tr.dataset.status===st) ? '' : 'none';
+  });
 }
+
+window.addEventListener('hashchange', () => applyDate(getDateFromHash()));
+applyDate(getDateFromHash());
 </script>
 </body>
 </html>
