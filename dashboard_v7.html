@@ -67,13 +67,26 @@ a { color: #93c5fd; }
 .date-btn.active { background: #4c1d95; color: #fff; border-color: #6d28d9; font-weight: 600; }
 .day-badge { background: #4c1d95; color: #c4b5fd; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; display: inline-block; margin-left: 10px; }
 .may11-only { display: none; }
-body.day-2026-05-11 .may11-only { display: table-row; }
+body.day-2026-05-11 .may11-only, body.day-2026-05-13 .may11-only, body.day-2026-05-14 .may11-only { display: table-row; }
+.stale-banner { background: #422006; color: #fbbf24; border: 1px solid #92400e; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; display: none; }
+body.day-2026-05-13 .stale-banner { display: block; }
+.ga-fresh { background: #0f172a; border: 1px solid #1e40af; border-radius: 8px; padding: 12px 14px; margin-top: 8px; font-size: 12px; color: #93c5fd; display: none; }
+body.day-2026-05-13 .ga-fresh { display: block; }
+
+.may14-only { display: none; }
+body.day-2026-05-14 .may14-only { display: table-row; }
+.pre-apr14 { /* default visible (May 8-13 builds); hidden when day-2026-05-14 active */ }
+body.day-2026-05-14 .pre-apr14 { display: none !important; }
+body.day-2026-05-14 .stale-banner { display: block; }
+body.day-2026-05-14 .ga-fresh { display: block; }
+.note-14 { display: none; }
+body.day-2026-05-14 .note-14 { display: block; }
 </style>
 </head>
-<body class="day-2026-05-11">
+<body class="day-2026-05-14">
 <div class="wrap">
 <header>
-<h1>LevelUp Insulation &mdash; Conversion Dashboard v7 <span class="day-badge" id="dayBadge">Snapshot: May 11, 2026</span></h1>
+<h1>LevelUp Insulation &mdash; Conversion Dashboard v7 <span class="day-badge" id="dayBadge">Snapshot: May 14, 2026</span></h1>
 <div class="subtitle">30-day window &middot; Lucky Orange &middot; Gravity Forms &middot; Google Ads (Search-LU-Denver)</div>
 <div class="meta">Use the date picker to switch between snapshots. URL hash (<code>#2026-05-09</code>) is shareable per day.</div>
 </header>
@@ -83,7 +96,25 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 <button class="date-btn" data-date="2026-05-08" onclick="setDate('2026-05-08')">May 8</button>
 <button class="date-btn" data-date="2026-05-09" onclick="setDate('2026-05-09')">May 9</button>
 <button class="date-btn" data-date="2026-05-10" onclick="setDate('2026-05-10')">May 10</button>
-<button class="date-btn active" data-date="2026-05-11" onclick="setDate('2026-05-11')">May 11</button>
+<button class="date-btn" data-date="2026-05-11" onclick="setDate('2026-05-11')">May 11</button>
+<button class="date-btn" data-date="2026-05-13" onclick="setDate('2026-05-13')">May 13</button>
+<button class="date-btn active" data-date="2026-05-14" onclick="setDate('2026-05-14')">May 14</button>
+</div>
+
+<div class="stale-banner">
+<strong>&#9888; Mixed snapshot.</strong> At today's 9 AM IST refresh, only WordPress and Google Ads were reachable. Lucky Orange and CallTrackingMetrics tabs are still logged out, so LO + CTM figures below are the most recent live values (LO May 11, CTM May 9). Google Ads overview is live; the per-campaign table was blocked by an ad-blocker overlay, so per-campaign breakdown stays on the prior figure. WordPress Gravity Forms is FRESH today — 33 entries (vs. 36 on May 11, net -3 from window aging).
+</div>
+
+<div class="ga-fresh">
+<strong>Google Ads &mdash; account overview, last 30 days (live May 14, GMT-06:00 MT date range Apr 14 &ndash; May 13):</strong>
+Impressions <strong>8,548</strong> &middot;
+Clicks <strong>315</strong> &middot;
+CTR <strong>3.69%</strong> &middot;
+Avg CPC <strong>$32.12</strong> &middot;
+Cost <strong>$10,116.61</strong> &middot;
+GA-tracked conv. <strong>43</strong> &middot;
+Cost/conv. <strong>$235.27</strong>
+&nbsp;<span style="color:#94a3b8">(Note: today's account-overview conversion count (10.00) is lower than yesterday's campaign-row figure (43). Likely a "primary conversion actions only" filter on the overview card vs. campaign-row "all conversions". LO-verified paid conversions remain at 9 from May 11 because LO is stale.)</span>
 </div>
 
 <div class="kpis">
@@ -149,7 +180,7 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 
 <div class="section">
 <h2>WP Form Leads</h2>
-<div class="desc">Gravity Forms (id=2) &middot; <span id="wp-desc">36 entries through May 11: 19 qualified, 15 OOA, 2 invalid</span>.</div>
+<div class="desc">Gravity Forms (id=2) &middot; <span id="wp-desc">33 entries through May 14: 17 qualified, 15 OOA, 1 invalid</span>.</div>
 <div class="tabs">
 <button class="tab active" onclick="filterLead(this,'all')">All (<span id="ft-all">36</span>)</button>
 <button class="tab" onclick="filterLead(this,'qualified')">Qualified (19)</button>
@@ -159,14 +190,14 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 <div class="scroll">
 <table id="leadTable">
 <thead><tr><th>Status</th><th>Date</th><th>Name (initials)</th><th>Phone</th><th>Service</th><th>Source URL</th></tr></thead>
-<tbody><tr class="may11-only" data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>May 11, 1:08 PM</td><td>D.K.</td><td>555-***-5555</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:25 PM</td><td>J.R.</td><td>720-***-8592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:03 AM</td><td>K.P.</td><td>970-***-2848</td><td>Spray Foam Insulation</td><td>/spray-foam-insulation</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 6, 3:13 PM</td><td>T.L.</td><td>630-***-0220</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 6, 9:25 AM</td><td>D.J.</td><td>720-***-2514</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 12:24 PM</td><td>R.B.</td><td>303-***-9347</td><td>Pest Control Insulation</td><td>/pest-control-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 11:06 AM</td><td>T.M.</td><td>303-***-1037</td><td>Crawl Space Encapsulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 5, 8:26 AM</td><td>I.S.</td><td>647-***-3374</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 4, 9:37 AM</td><td>D.R.</td><td>720-***-7067</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 2, 5:23 PM</td><td>D.N.</td><td>303-***-2417</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 2, 1:14 PM</td><td>M.C.</td><td>786-***-2678</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 1, 2:39 PM</td><td>F.S.</td><td>303-***-8254</td><td>Attic Insulation</td><td>/best-insulation-for-attics</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 1, 6:11 AM</td><td>D.H.</td><td>561-***-5431</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 30, 2:12 PM</td><td>B.B.</td><td>303-***-4209</td><td>Commercial Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 30, 12:31 PM</td><td>S.V.</td><td>408-***-6191</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 2:11 PM</td><td>P.H.</td><td>720-***-0455</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 1:25 PM</td><td>F.B.</td><td>303-***-9366</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 27, 5:46 AM</td><td>D.S.V.</td><td>434-***-3976</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>Apr 25, 9:26 PM</td><td>B.F.</td><td>***</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 23, 5:25 PM</td><td>J.S.</td><td>805-***-3873</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 23, 8:11 AM</td><td>C.L.O.</td><td>303-***-4586</td><td>Insulation Removal</td><td>/attic-sealing</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 4:55 PM</td><td>E.B.</td><td>563-***-9859</td><td>Insulation Removal</td><td>/insulation-removal-services</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 6:49 AM</td><td>T.K.</td><td>941-***-2139</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 21, 12:17 PM</td><td>D.L.</td><td>313-***-1339</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 20, 1:37 AM</td><td>J.A.</td><td>966-***-8593</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 18, 7:13 PM</td><td>D.</td><td>303-***-8083</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 17, 2:37 PM</td><td>B.D.</td><td>720-***-1192</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 17, 6:29 AM</td><td>R.A.</td><td>323-***-5904</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 11:19 AM</td><td>S.A.R.</td><td>720-***-3592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 16, 9:57 AM</td><td>M.P.</td><td>361-***-1819</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 7:45 AM</td><td>J.R.</td><td>303-***-6789</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 15, 8:38 AM</td><td>B.W.</td><td>303-***-0468</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 14, 8:37 AM</td><td>C.Q.</td><td>858-***-8388</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 2:07 PM</td><td>S.H.</td><td>720-***-2987</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 13, 8:18 AM</td><td>G.B.</td><td>314-***-9062</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 7:46 AM</td><td>P.K.</td><td>303-***-6563</td><td>Attic Insulation</td><td>/contact</td></tr></tbody>
+<tbody><tr class="may14-only" data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 12, 8:22 PM</td><td>J.L.</td><td>307-***-2826</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr class="may11-only" data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>May 11, 1:08 PM</td><td>D.K.</td><td>555-***-5555</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:25 PM</td><td>J.R.</td><td>720-***-8592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 7, 6:03 AM</td><td>K.P.</td><td>970-***-2848</td><td>Spray Foam Insulation</td><td>/spray-foam-insulation</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 6, 3:13 PM</td><td>T.L.</td><td>630-***-0220</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 6, 9:25 AM</td><td>D.J.</td><td>720-***-2514</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 12:24 PM</td><td>R.B.</td><td>303-***-9347</td><td>Pest Control Insulation</td><td>/pest-control-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 5, 11:06 AM</td><td>T.M.</td><td>303-***-1037</td><td>Crawl Space Encapsulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 5, 8:26 AM</td><td>I.S.</td><td>647-***-3374</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 4, 9:37 AM</td><td>D.R.</td><td>720-***-7067</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 2, 5:23 PM</td><td>D.N.</td><td>303-***-2417</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 2, 1:14 PM</td><td>M.C.</td><td>786-***-2678</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>May 1, 2:39 PM</td><td>F.S.</td><td>303-***-8254</td><td>Attic Insulation</td><td>/best-insulation-for-attics</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>May 1, 6:11 AM</td><td>D.H.</td><td>561-***-5431</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 30, 2:12 PM</td><td>B.B.</td><td>303-***-4209</td><td>Commercial Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 30, 12:31 PM</td><td>S.V.</td><td>408-***-6191</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 2:11 PM</td><td>P.H.</td><td>720-***-0455</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 27, 1:25 PM</td><td>F.B.</td><td>303-***-9366</td><td>Insulation Removal</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 27, 5:46 AM</td><td>D.S.V.</td><td>434-***-3976</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="invalid_phone"><td><span class="tag invalid_phone">Invalid</span></td><td>Apr 25, 9:26 PM</td><td>B.F.</td><td>***</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 23, 5:25 PM</td><td>J.S.</td><td>805-***-3873</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 23, 8:11 AM</td><td>C.L.O.</td><td>303-***-4586</td><td>Insulation Removal</td><td>/attic-sealing</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 4:55 PM</td><td>E.B.</td><td>563-***-9859</td><td>Insulation Removal</td><td>/insulation-removal-services</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 22, 6:49 AM</td><td>T.K.</td><td>941-***-2139</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 21, 12:17 PM</td><td>D.L.</td><td>313-***-1339</td><td>Attic Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 20, 1:37 AM</td><td>J.A.</td><td>966-***-8593</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 18, 7:13 PM</td><td>D.</td><td>303-***-8083</td><td>Blown-In Insulation</td><td>/blown-in-insulation</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 17, 2:37 PM</td><td>B.D.</td><td>720-***-1192</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 17, 6:29 AM</td><td>R.A.</td><td>323-***-5904</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 11:19 AM</td><td>S.A.R.</td><td>720-***-3592</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 16, 9:57 AM</td><td>M.P.</td><td>361-***-1819</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 16, 7:45 AM</td><td>J.R.</td><td>303-***-6789</td><td>Other / Not Sure</td><td>/contact</td></tr><tr data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 15, 8:38 AM</td><td>B.W.</td><td>303-***-0468</td><td>Blown-In Insulation</td><td>/contact</td></tr><tr data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 14, 8:37 AM</td><td>C.Q.</td><td>858-***-8388</td><td>Spray Foam Insulation</td><td>/contact</td></tr><tr class="pre-apr14" data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 2:07 PM</td><td>S.H.</td><td>720-***-2987</td><td>Insulation Removal</td><td>/contact</td></tr><tr class="pre-apr14" data-status="out_of_area"><td><span class="tag out_of_area">OOA</span></td><td>Apr 13, 8:18 AM</td><td>G.B.</td><td>314-***-9062</td><td>Attic Insulation</td><td>/contact</td></tr><tr class="pre-apr14" data-status="qualified"><td><span class="tag qualified">Qualified</span></td><td>Apr 13, 7:46 AM</td><td>P.K.</td><td>303-***-6563</td><td>Attic Insulation</td><td>/contact</td></tr></tbody>
 </table>
 </div>
 </div>
 
 <div class="section">
 <h2>Recommendations</h2>
-<div class="desc" id="rec-desc">Snapshot for May 11, 2026.</div>
+<div class="desc" id="rec-desc">Snapshot for May 14, 2026.</div>
 <div class="rec good">
 <h3 id="rec1-title">1. Paid CR 5.20% on 173 paid sessions.</h3>
 <p id="rec1-body">9 verified paid conversions. Top-converting terms: home insulation services (2), insulation removal (2), spray foam insulation for houses (1), insulation contractors denver (1), insulation companies denver (1), home insulation services denver (1), attic insulation near me (1).</p>
@@ -190,7 +221,7 @@ body.day-2026-05-11 .may11-only { display: table-row; }
 </div>
 
 <div class="footer">
-<span id="ft-text">Snapshot: May 11, 2026 &middot; Lucky Orange (769 sessions, Apr 12 &ndash; May 11) &middot; Gravity Forms (36 entries) &middot; CTM not included &middot; Google Ads (Search-LU-Denver, ocid 1561208626).</span>
+<span id="ft-text">Snapshot: May 14, 2026 &middot; Lucky Orange 769 sessions (carry-forward May 11) &middot; Gravity Forms 33 entries (FRESH) &middot; CTM 609 calls (carry-forward May 9) &middot; Google Ads account overview last 30d (LIVE): $10,116.61 / 315 clicks / 10 conv.</span>
 </div>
 
 </div>
@@ -232,9 +263,30 @@ const DATA = {
     orgS: 350, orgCR: '3.43', dirS: 217, dirCR: '2.30', refS: 21, paidS_b: 173, paidCR_b: '5.20',
     barOrg: 100.0, barDir: 62.0, barPaid: 49.4, barRef: 6.0,
     noConv: 164, noPct: '94.8', crA: '5.20',
-    wpTotal: 36, wpInvalid: 2, wpDesc: '36 entries through May 11: 19 qualified, 15 OOA, 2 invalid',
+    wpTotal: 36, wpInvalid: 2, wpDesc: '33 entries through May 14: 17 qualified, 15 OOA, 1 invalid',
     ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9',
     dirPct: 28, ftText: 'Snapshot: May 11, 2026 · Lucky Orange (769 sessions, Apr 12 – May 11) · Gravity Forms (36 entries) · CallTrackingMetrics (609 calls, carry-forward) · Google Ads (Search-LU-Denver, ocid 1561208626).'
+  },
+  '2026-05-13': {
+
+    label: 'May 13, 2026 (carry-forward)', window: 'Apr 14 – May 13 (LO/WP/CTM stale)',
+    total: 769, paidS: 173, tagged: 35, paidCR: '5.20',
+    orgS: 350, orgCR: '3.43', dirS: 217, dirCR: '2.30', refS: 21, paidS_b: 173, paidCR_b: '5.20',
+    barOrg: 100.0, barDir: 62.0, barPaid: 49.4, barRef: 6.0,
+    noConv: 164, noPct: '94.8', crA: '5.20',
+    wpTotal: 36, wpInvalid: 2, wpDesc: '36 entries (carry-forward from May 11): 19 qualified, 15 OOA, 2 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9',
+    dirPct: 28, ftText: 'Snapshot: May 13, 2026 · LO/WP/CTM tabs logged out — values carried from May 11 build · Google Ads (Search-LU-Denver, last 30d LIVE): $10,116.61 spend / 315 clicks / 43 GA-tracked conv.'
+  },
+  '2026-05-14': {
+    label: 'May 14, 2026 (mixed: WP+GA fresh, LO+CTM stale)', window: 'Apr 14 – May 14',
+    total: 769, paidS: 173, tagged: 35, paidCR: '5.20',
+    orgS: 350, orgCR: '3.43', dirS: 217, dirCR: '2.30', refS: 21, paidS_b: 173, paidCR_b: '5.20',
+    barOrg: 100.0, barDir: 62.0, barPaid: 49.4, barRef: 6.0,
+    noConv: 164, noPct: '94.8', crA: '5.20',
+    wpTotal: 33, wpQual: 17, wpOoa: 15, wpInvalid: 1, wpDesc: '33 entries in 30-day window (FRESH today): 17 qualified, 15 OOA, 1 invalid',
+    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9 (CTM still logged out)',
+    dirPct: 28, ftText: 'Snapshot: May 14, 2026 · Lucky Orange 769 sessions (carry-forward from May 11) · Gravity Forms 33 entries (FRESH today, 17 qual / 15 OOA / 1 invalid) · CallTrackingMetrics 609 calls (carry-forward) · Google Ads account overview last 30d (LIVE): $10,116.61 spend / 315 clicks / 8,548 imp / 10.00 conv.'
   }
 };
 
@@ -249,7 +301,7 @@ function applyDate(d) {
   // Day badge
   document.getElementById('dayBadge').textContent = 'Snapshot: ' + x.label;
   // Body class controls May 11-only rows
-  document.body.classList.remove('day-2026-05-09', 'day-2026-05-10', 'day-2026-05-11');
+  document.body.classList.remove('day-2026-05-08', 'day-2026-05-09', 'day-2026-05-10', 'day-2026-05-11', 'day-2026-05-13', 'day-2026-05-14');
   document.body.classList.add('day-' + d);
   // Active button
   document.querySelectorAll('.date-btn').forEach(b => b.classList.toggle('active', b.dataset.date === d));
@@ -260,7 +312,7 @@ function applyDate(d) {
   document.getElementById('kpi-tagged').textContent = x.tagged;
   document.getElementById('kpi-paidCR').textContent = x.paidCR;
   document.getElementById('kpi-wp').textContent = x.wpTotal;
-  document.getElementById('kpi-wp-sub').textContent = '19 qual · 15 OOA · ' + x.wpInvalid + ' invalid';
+  document.getElementById('kpi-wp-sub').textContent = (x.wpQual || 19) + ' qual · ' + (x.wpOoa || 15) + ' OOA · ' + x.wpInvalid + ' invalid';
   document.getElementById('kpi-ctm').textContent = x.ctm;
   document.getElementById('kpi-ctm-sub').textContent = x.ctmSub;
   // CTM section
@@ -302,7 +354,7 @@ function applyDate(d) {
 
 function getDateFromHash() {
   const h = location.hash.slice(1);
-  return DATA[h] ? h : '2026-05-11';
+  return DATA[h] ? h : '2026-05-14';
 }
 
 function filterConv(btn, b) {
@@ -319,7 +371,7 @@ function filterLead(btn, st) {
   btn.classList.add('active');
   document.querySelectorAll('#leadTable tbody tr').forEach(tr => {
     // Respect both data-status AND may11-only class visibility
-    const dayHidden = tr.classList.contains('may11-only') && !document.body.classList.contains('day-2026-05-11');
+    const dayHidden = tr.classList.contains('may11-only') && !(document.body.classList.contains('day-2026-05-11') || document.body.classList.contains('day-2026-05-13') || document.body.classList.contains('day-2026-05-14'));
     if (dayHidden) { tr.style.display = 'none'; return; }
     tr.style.display = (st==='all' || tr.dataset.status===st) ? '' : 'none';
   });
