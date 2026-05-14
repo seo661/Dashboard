@@ -102,7 +102,7 @@ body.day-2026-05-14 .note-14 { display: block; }
 </div>
 
 <div class="stale-banner">
-<strong>&#9888; Mixed snapshot.</strong> At today's 9 AM IST refresh, only WordPress and Google Ads were reachable. Lucky Orange and CallTrackingMetrics tabs are still logged out, so LO + CTM figures below are the most recent live values (LO May 11, CTM May 9). Google Ads overview is live; the per-campaign table was blocked by an ad-blocker overlay, so per-campaign breakdown stays on the prior figure. WordPress Gravity Forms is FRESH today — 33 entries (vs. 36 on May 11, net -3 from window aging).
+<strong>&#9888; Mixed snapshot.</strong> WordPress, Google Ads, and CallTrackingMetrics are FRESH today. CallTrackingMetrics was re-authenticated mid-day and pulled live via the CTM API — 191 calls in the Apr 14–May 13 window (replaces the old 609 carry-forward, which was a May 9 sample estimate). WordPress Gravity Forms is fresh — 33 entries (vs. 36 on May 11, net -3 from window aging). Google Ads account overview is live; the per-campaign table was blocked by an ad-blocker overlay, so per-campaign breakdown stays on the prior figure. Only Lucky Orange remains stale — its tab was logged out, so LO session/conversion figures are carried forward from May 11.
 </div>
 
 <div class="ga-fresh">
@@ -166,15 +166,15 @@ Cost/conv. <strong>$235.27</strong>
 
 <div class="section">
 <h2>CallTrackingMetrics Calls</h2>
-<div class="desc"><span id="ctm-desc">609 total calls in 30-day window ending May 11 (carry-forward from May 9 build &mdash; CTM tab logged out at refresh)</span>. Per-call detail requires CTM authentication &mdash; <a href="https://app.calltrackingmetrics.com/login" target="_blank">sign in here</a>.</div>
+<div class="desc"><span id="ctm-desc">191 total calls in 30-day window ending May 14 (LIVE pull via CTM API on May 14)</span>. <span class="note-14">150 inbound &middot; 126 answered / 24 missed &middot; 95 Colorado / 55 out-of-area &middot; 107 short calls (&lt;60s) &middot; avg duration 80s.</span></div>
 <div class="kpis" style="margin-bottom:0">
-<div class="kpi"><div class="kpi-label">Total Calls (30d)</div><div class="kpi-value" id="ctm-total">609</div><div class="kpi-sub" id="ctm-total-sub">From May 9 daily build</div></div>
-<div class="kpi"><div class="kpi-label">Source Breakdown</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Requires CTM login</div></div>
+<div class="kpi"><div class="kpi-label">Total Calls (30d)</div><div class="kpi-value" id="ctm-total">191</div><div class="kpi-sub" id="ctm-total-sub">Live via CTM API &middot; Apr 14&ndash;May 13</div></div>
+<div class="kpi"><div class="kpi-label">Source Breakdown</div><div class="kpi-value" style="font-size:14px;color:#10b981">100% Organic Google</div><div class="kpi-sub">137 organic search &middot; 54 Google Business Profile &middot; 0 paid</div></div>
 <div class="kpi"><div class="kpi-label">Spam Filter</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Calls &lt;60s, OOA</div></div>
 <div class="kpi"><div class="kpi-label">Routing</div><div class="kpi-value" style="font-size:14px;color:#94a3b8">Not available</div><div class="kpi-sub">Destination breakdown</div></div>
 </div>
 <div style="background:#0f172a;border:1px dashed #334155;border-radius:8px;padding:16px;margin-top:12px;text-align:center;color:#64748b;font-size:12px">
-&#9432; Once CTM is authenticated in the connected Chrome, this section will populate with per-call detail: caller phone (masked), source classification (organic / paid / referral / direct), duration, datetime, status, and routing destination &mdash; same way WP form leads are shown above.
+&#9432; CTM was re-authenticated on May 14 and pulled live via the CTM API (account 583997). 191 calls across the Apr 14&ndash;May 13 window: all classified as organic Google &mdash; 137 from organic search and 54 from Google Business Profile listings (Aurora, Denver, Colorado Springs, Fort Collins, Arvada, Lakewood). No paid call tracking is routed through CTM. The earlier 609 figure was a May 9 sample-aggregated estimate and has been replaced by this live count.
 </div>
 </div>
 
@@ -215,13 +215,13 @@ Cost/conv. <strong>$235.27</strong>
 <p>Brand recall holding. Continue brand-driven content, GBP freshness, NAP consistency.</p>
 </div>
 <div class="rec warn">
-<h3>5. CTM call-tracking carried forward from May 9 build.</h3>
-<p>The May 9 daily build captured <strong>609 total calls</strong> across the prior 30-day window (sample-aggregated). CTM tab has been logged out at every refresh since, so the May 10 and May 11 snapshots reuse the same figure. To get fresh per-day call counts, re-authenticate <a href="https://app.calltrackingmetrics.com/login" target="_blank">CTM</a> in the connected Chrome.</p>
+<h3>5. CTM call-tracking is live again (191 calls, all organic Google).</h3>
+<p>CTM was re-authenticated on May 14 and pulled live via the API: <strong>191 calls</strong> in the Apr 14&ndash;May 13 window &mdash; 150 inbound (126 answered, 24 missed), 95 from Colorado vs 55 out-of-area, and 107 short calls under 60 seconds. Every call sourced from organic Google (search + Google Business Profile); none from paid. The high out-of-area and short-call share suggests the Google Business Profile listings are pulling a meaningful volume of low-intent calls worth reviewing.</p>
 </div>
 </div>
 
 <div class="footer">
-<span id="ft-text">Snapshot: May 14, 2026 &middot; Lucky Orange 769 sessions (carry-forward May 11) &middot; Gravity Forms 33 entries (FRESH) &middot; CTM 609 calls (carry-forward May 9) &middot; Google Ads account overview last 30d (LIVE): $10,116.61 / 315 clicks / 10 conv.</span>
+<span id="ft-text">Snapshot: May 14, 2026 &middot; Lucky Orange 769 sessions (carry-forward May 11) &middot; Gravity Forms 33 entries (FRESH) &middot; CTM 191 calls (FRESH via API) &middot; Google Ads account overview last 30d (LIVE): $10,116.61 / 315 clicks / 10 conv.</span>
 </div>
 
 </div>
@@ -279,14 +279,14 @@ const DATA = {
     dirPct: 28, ftText: 'Snapshot: May 13, 2026 · LO/WP/CTM tabs logged out — values carried from May 11 build · Google Ads (Search-LU-Denver, last 30d LIVE): $10,116.61 spend / 315 clicks / 43 GA-tracked conv.'
   },
   '2026-05-14': {
-    label: 'May 14, 2026 (mixed: WP+GA fresh, LO+CTM stale)', window: 'Apr 14 – May 14',
+    label: 'May 14, 2026 (WP+GA+CTM fresh, LO stale)', window: 'Apr 14 – May 14',
     total: 769, paidS: 173, tagged: 35, paidCR: '5.20',
     orgS: 350, orgCR: '3.43', dirS: 217, dirCR: '2.30', refS: 21, paidS_b: 173, paidCR_b: '5.20',
     barOrg: 100.0, barDir: 62.0, barPaid: 49.4, barRef: 6.0,
     noConv: 164, noPct: '94.8', crA: '5.20',
     wpTotal: 33, wpQual: 17, wpOoa: 15, wpInvalid: 1, wpDesc: '33 entries in 30-day window (FRESH today): 17 qualified, 15 OOA, 1 invalid',
-    ctm: 609, ctmSub: 'Last 30 days · carry-forward from May 9 (CTM still logged out)',
-    dirPct: 28, ftText: 'Snapshot: May 14, 2026 · Lucky Orange 769 sessions (carry-forward from May 11) · Gravity Forms 33 entries (FRESH today, 17 qual / 15 OOA / 1 invalid) · CallTrackingMetrics 609 calls (carry-forward) · Google Ads account overview last 30d (LIVE): $10,116.61 spend / 315 clicks / 8,548 imp / 10.00 conv.'
+    ctm: 191, ctmFresh: true, ctmSub: 'Apr 14–May 13 · LIVE via CTM API',
+    dirPct: 28, ftText: 'Snapshot: May 14, 2026 · Lucky Orange 769 sessions (carry-forward from May 11) · Gravity Forms 33 entries (FRESH, 17 qual / 15 OOA / 1 invalid) · CallTrackingMetrics 191 calls (FRESH via API: 150 inbound, 126 answered, 95 CO / 55 OOA, all organic Google) · Google Ads account overview last 30d (LIVE): $10,116.61 spend / 315 clicks / 8,548 imp / 10.00 conv.'
   }
 };
 
@@ -316,10 +316,10 @@ function applyDate(d) {
   document.getElementById('kpi-ctm').textContent = x.ctm;
   document.getElementById('kpi-ctm-sub').textContent = x.ctmSub;
   // CTM section
-  const ctmEra = (d === '2026-05-09') ? 'live from May 9 build' : 'carry-forward from May 9 build (CTM tab logged out at refresh)';
+  const ctmEra = (d === '2026-05-14') ? 'LIVE pull via CTM API on May 14' : (d === '2026-05-09') ? 'live from May 9 build' : 'carry-forward from May 9 build (CTM tab logged out at refresh)';
   document.getElementById('ctm-desc').textContent = x.ctm + ' total calls in 30-day window ending ' + x.label.replace(', 2026','') + ' (' + ctmEra + ')';
   document.getElementById('ctm-total').textContent = x.ctm;
-  document.getElementById('ctm-total-sub').textContent = (d === '2026-05-09') ? 'From May 9 daily build' : 'Carry-forward from May 9 (no live refresh)';
+  document.getElementById('ctm-total-sub').textContent = (d === '2026-05-14') ? 'Live via CTM API · Apr 14–May 13' : (d === '2026-05-09') ? 'From May 9 daily build' : 'Carry-forward from May 9 (no live refresh)';
   // Source bars
   document.getElementById('sb-total').textContent = x.total;
   document.getElementById('sb-orgS').textContent = x.orgS;
