@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>LevelUP Insulation — Advanced Conversion Dashboard</title>
+<style>
+:root{color-scheme:light;--bg:#f4f6f9;--card:#fff;--ink:#1a2433;--soft:#5b6776;--line:#e4e8ee;--brand:#0e5fae;--brand-deep:#093f73;--green:#18a957;--amber:#e8920c;--violet:#6a4bc4;--red:#d2473b;--grey:#8a96a5;--shadow:0 1px 3px rgba(16,32,55,.06),0 6px 22px rgba(16,32,55,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 64px}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+.topbar{background:linear-gradient(135deg,var(--brand-deep),var(--brand));color:#fff;border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px}
+.topbar h1{font-size:21px;font-weight:700}.topbar .sub{font-size:12.5px;opacity:.82;margin-top:3px}
+.topbar .meta{text-align:right;font-size:12px;opacity:.92}.topbar .meta strong{display:block;font-size:13px}
+.section{margin-top:30px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.section-head .dot{width:10px;height:10px;border-radius:3px}
+.section-head h2{font-size:15px;font-weight:700;letter-spacing:.2px;text-transform:uppercase}
+.section-head .tag{font-size:11px;color:var(--soft);background:var(--card);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+.filterbar{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.filterbar label{font-size:11px;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.filterbar select{font-family:inherit;font-size:12.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 9px;cursor:pointer}
+.filterbar .reset{font-size:11.5px;color:var(--brand);background:none;border:none;cursor:pointer;font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brand)}
+.kpi.k-call::before{background:var(--brand)}.kpi.k-rec::before{background:var(--green)}.kpi.k-ads::before{background:var(--amber)}.kpi.k-roi::before{background:var(--violet)}.kpi.k-miss::before{background:var(--red)}
+.kpi .label{font-size:11px;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kpi .value{font-size:28px;font-weight:750;margin-top:5px;letter-spacing:-.5px}
+.kpi .note{font-size:11px;color:var(--soft);margin-top:3px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.panel h3{font-size:13px;font-weight:700;margin-bottom:3px}.panel .pdesc{font-size:11.5px;color:var(--soft);margin-bottom:12px}
+.panel-grid{display:grid;gap:14px;margin-top:14px}.grid-2{grid-template-columns:1fr 1fr}.grid-2-1{grid-template-columns:1.7fr 1fr}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:7px 9px;vertical-align:top}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--soft);border-bottom:2px solid var(--line);position:sticky;top:0;background:var(--card);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--ink)}td{border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl-scroll{max-height:460px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.pill.lead{background:#e3f6ec;color:#117c41}.pill.spam{background:#fde6e3;color:#a8362c}.pill.cust{background:#e7eefb;color:#1d4f9c}.pill.other{background:#eef1f5;color:#5b6776}
+.pill.ans{background:#e3f6ec;color:#117c41}.pill.noans{background:#f3eee0;color:#8a6d1d}.pill.busy{background:#fde6e3;color:#a8362c}
+.pill.green{background:#e3f6ec;color:#117c41}.pill.amber{background:#fdf0db;color:#b06d05}.pill.paid{background:#fdf0db;color:#b06d05}
+.callout{background:#fff8ec;border:1px solid #f3dca9;border-radius:10px;padding:11px 14px;font-size:12px;color:#7a5a12;margin-top:12px}
+.callout strong{color:#5e4408}.callout.violet{background:#f1eefb;border-color:#cfc4ee;color:#473086}.callout.violet strong{color:#33205f}
+.insight-list{list-style:none}
+.insight-list li{font-size:12.5px;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line)}
+.insight-list li:last-child{border-bottom:none}
+.insight-list li::before{content:"\25B8";position:absolute;left:4px;color:var(--brand);font-size:11px;top:9px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--soft);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:9px;height:9px;border-radius:2px;display:inline-block}
+.barmini{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:3px}.barmini i{display:block;height:100%;border-radius:4px}
+.muted{color:var(--soft)}.empty{padding:26px;text-align:center;color:var(--soft);font-size:12.5px}
+.count-note{font-size:11px;color:var(--soft);margin-top:8px}
+.outsel{font-family:inherit;font-size:11.5px;border:1px solid var(--line);border-radius:6px;padding:3px 5px;background:#fff;color:var(--ink)}
+.outsel.won{background:#e3f6ec;color:#117c41;border-color:#bfe3cc}.outsel.lost{background:#fde6e3;color:#a8362c;border-color:#f0c8c2}
+.outval{font-family:inherit;font-size:11.5px;border:1px solid var(--line);border-radius:6px;padding:3px 6px;width:92px;color:var(--ink)}
+.footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft)}
+.footer .src{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px}.footer .src span{display:inline-flex;align-items:center;gap:6px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.grid-2,.grid-2-1{grid-template-columns:1fr}.topbar{flex-direction:column;align-items:flex-start}.topbar .meta{text-align:left}.filterbar{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+<div>
+<h1>LevelUP Insulation — Advanced Conversion Dashboard</h1>
+<div class="sub">Call detail &middot; conversion recordings &middot; Search-LU-Denver keywords &middot; levelupinsulation.co</div>
+</div>
+<div class="meta"><strong>Reporting period</strong>Apr 14 – May 14, 2026<br><span style="opacity:.7">Snapshot pulled May 14, 2026</span></div>
+</div>
+
+<div class="section">
+<div class="section-head"><span class="dot" style="background:var(--brand)"></span><h2>Conversion Overview</h2><span class="tag">Full 30-day period</span></div>
+<div class="kpi-grid">
+<div class="kpi k-call"><div class="label">Tracked Phone Calls</div><div class="value">141</div><div class="note">Call Tracking Metrics</div></div>
+<div class="kpi k-rec"><div class="label">Conversion Recordings</div><div class="value">36</div><div class="note">Lucky Orange "Thank-You" sessions</div></div>
+<div class="kpi k-ads"><div class="label">Google Ads Conversions</div><div class="value">10</div><div class="note">Search-LU-Denver &middot; $961 / conv</div></div>
+<div class="kpi k-call"><div class="label">Genuine Sales Leads</div><div class="value">37</div><div class="note">estimate / quote / inspection calls</div></div>
+</div>
+<div class="callout"><strong>How to use this dashboard:</strong> each section has its own <em>Date / Week / Month</em> filter. Pick a granularity, then choose a specific day, week or month to see conversions for just that period. Every recording row has a <strong>Watch</strong> link that opens that exact session replay in Lucky Orange.</div>
+</div>
+
+<div class="section">
+<div class="section-head"><span class="dot" style="background:var(--brand)"></span><h2>Phone Calls — Call Tracking Metrics</h2>
+<div class="filterbar"><label>View</label>
+<select id="callMode"><option value="all">All time</option><option value="day">By day</option><option value="week">By week</option><option value="month">By month</option></select>
+<select id="callPeriod" style="display:none"></select><button class="reset" id="callReset">Reset</button></div>
+</div>
+<div class="kpi-grid" id="callKpis"></div>
+<div class="panel-grid grid-2-1">
+<div class="panel" style="padding-bottom:14px">
+<h3>Call detail <span class="muted" id="callRangeLbl"></span></h3>
+<div class="pdesc">Every tracked call. Click a column header to sort. Caller info is your own lead data from CTM.</div>
+<div class="tbl-scroll"><table id="callTable"><thead><tr>
+<th data-k="d">Date</th><th data-k="t">Time</th><th data-k="n">Caller</th><th data-k="l">Location</th><th data-k="s">Source</th>
+<th data-k="dur" class="num">Talk</th><th data-k="st">Status</th><th data-k="ty">Type</th><th data-k="note">Summary</th>
+</tr></thead><tbody id="callBody"></tbody></table></div>
+<div class="count-note" id="callCount"></div>
+</div>
+<div class="panel">
+<h3>Call mix</h3><div class="pdesc">Breakdown for the selected period</div><div id="callMix"></div>
+<div class="legend"><span><i class="sw" style="background:var(--green)"></i>Lead</span><span><i class="sw" style="background:var(--red)"></i>Spam</span><span><i class="sw" style="background:var(--brand)"></i>Customer</span><span><i class="sw" style="background:var(--grey)"></i>Other</span></div>
+<h3 style="margin-top:18px">Top call sources</h3><div class="pdesc">By volume</div><div id="callSources"></div>
+</div>
+</div>
+<div class="panel-grid grid-2">
+<div class="panel"><h3>Service interest</h3><div class="pdesc">What callers are asking about (leads &amp; customers with an identified service)</div><div id="svcType"></div></div>
+<div class="panel"><h3>Service area</h3><div class="pdesc">Where calls are coming from</div><div id="svcArea"></div></div>
+</div>
+<div class="panel" style="margin-top:14px;padding-bottom:14px">
+<h3>Missed calls <span class="muted" id="missRangeLbl"></span></h3>
+<div class="pdesc">Calls that went unanswered or busy. Most are GBP voicemail spam — but the ones tagged Lead or Customer are real follow-up opportunities.</div>
+<div class="kpi-grid" id="missKpis" style="margin-bottom:14px"></div>
+<div class="tbl-scroll" style="max-height:300px"><table id="missTable"><thead><tr>
+<th>Date</th><th>Time</th><th>Caller</th><th>Location</th><th>Source</th><th>Status</th><th>Type</th><th>Summary</th>
+</tr></thead><tbody id="missBody"></tbody></table></div>
+<div class="count-note" id="missCount"></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-head"><span class="dot" style="background:var(--green)"></span><h2>Conversion Session Recordings — Lucky Orange</h2>
+<div class="filterbar"><label>View</label>
+<select id="recMode"><option value="all">All time</option><option value="day">By day</option><option value="week">By week</option><option value="month">By month</option></select>
+<select id="recPeriod" style="display:none"></select><button class="reset" id="recReset">Reset</button></div>
+</div>
+<div class="kpi-grid" id="recKpis"></div>
+<div class="panel" style="margin-top:14px;padding-bottom:14px">
+<h3>Conversion recordings <span class="muted" id="recRangeLbl"></span></h3>
+<div class="pdesc">Every session where a visitor reached the "Thank-You" page (a form submission). Click <strong>Watch</strong> to open that exact session replay in Lucky Orange (you must be logged in).</div>
+<div class="tbl-scroll"><table id="recTable"><thead><tr>
+<th data-k="d">Date</th><th data-k="t">Time</th><th data-k="loc">Location</th><th data-k="src">Source</th><th data-k="land">Landing Page</th>
+<th data-k="pg" class="num">Pages</th><th data-k="dur">Time</th><th data-k="kw">Paid Keyword</th><th>Watch</th>
+</tr></thead><tbody id="recBody"></tbody></table></div>
+<div class="count-note" id="recCount"></div>
+</div>
+<div class="panel-grid grid-2">
+<div class="panel"><h3>Conversions by traffic source</h3><div class="pdesc">Selected period</div><div id="recSources"></div></div>
+<div class="panel"><h3>Conversions by landing page</h3><div class="pdesc">Selected period</div><div id="recLanding"></div></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-head"><span class="dot" style="background:var(--amber)"></span><h2>Search - LU - Denver — Campaign &amp; Keyword Conversions</h2><span class="tag">Google Ads &middot; Apr 14 – May 13, 2026</span></div>
+<div class="kpi-grid">
+<div class="kpi k-ads"><div class="label">Impressions</div><div class="value">8,200</div><div class="note">3.79% interaction rate</div></div>
+<div class="kpi k-ads"><div class="label">Clicks</div><div class="value">311</div><div class="note">avg CPC $30.91</div></div>
+<div class="kpi k-ads"><div class="label">Conversions</div><div class="value">10</div><div class="note">3.22% conversion rate</div></div>
+<div class="kpi k-ads"><div class="label">Cost</div><div class="value">$9,614</div><div class="note">$961 / conversion</div></div>
+</div>
+<div class="panel" style="margin-top:14px">
+<h3>Keyword performance — all 10 keywords in the campaign</h3>
+<div class="pdesc">Conversion figures are from Google Ads conversion tracking. The campaign is currently <strong>paused</strong>.</div>
+<div class="tbl-scroll" style="max-height:none"><table id="kwTable"><thead><tr>
+<th data-k="kw">Keyword</th><th data-k="match">Match</th><th data-k="impr" class="num">Impr.</th><th data-k="clicks" class="num">Clicks</th>
+<th data-k="ir" class="num">Int. rate</th><th data-k="cpc" class="num">Avg CPC</th><th data-k="cost" class="num">Cost</th>
+<th data-k="conv" class="num">Conv.</th><th data-k="cr" class="num">Conv. rate</th><th data-k="cpa" class="num">Cost / conv.</th>
+</tr></thead><tbody id="kwBody"></tbody></table></div>
+<div class="callout"><strong>Only 2 keywords show tracked conversions in Google Ads:</strong> "home insulation services" (3) and "insulation removal" (1). The campaign total is 10 — the other conversions are attributed at campaign level or via close-variant search terms. The converting search queries captured by Lucky Orange are shown below.</div>
+</div>
+<div class="section" style="margin-top:18px">
+<div class="section-head"><span class="dot" style="background:var(--amber)"></span><h2 style="font-size:13px">Converting Search Queries (from Lucky Orange UTM data)</h2>
+<div class="filterbar"><label>View</label>
+<select id="qMode"><option value="all">All time</option><option value="day">By day</option><option value="week">By week</option><option value="month">By month</option></select>
+<select id="qPeriod" style="display:none"></select><button class="reset" id="qReset">Reset</button></div>
+</div>
+<div class="panel" style="padding-bottom:14px">
+<h3>Paid search terms that produced a form conversion <span class="muted" id="qRangeLbl"></span></h3>
+<div class="pdesc">The actual queries (UTM term) on Search-LU-Denver clicks that ended in a "Thank-You" page — from Lucky Orange. Each row links to its session replay.</div>
+<div class="tbl-scroll" style="max-height:none"><table id="qTable"><thead><tr>
+<th data-k="d">Date</th><th data-k="t">Time</th><th data-k="kw">Search query (UTM term)</th><th data-k="land">Landing page</th>
+<th data-k="loc">Location</th><th data-k="pg" class="num">Pages</th><th>Watch</th>
+</tr></thead><tbody id="qBody"></tbody></table></div>
+<div class="count-note" id="qCount"></div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-head"><span class="dot" style="background:var(--brand-deep)"></span><h2>Key Takeaways</h2></div>
+<div class="panel"><ul class="insight-list">
+<li><strong>Phone is the dominant lead channel</strong> — of 141 tracked calls, 37 are genuine estimate/quote/inspection requests. Almost all valuable calls trace back to Google Organic and Google Business Profile listings.</li>
+<li><strong>Most "missed" calls are noise, not lost revenue</strong> — the large majority of unanswered calls are GBP voicemail spam and Google-listing scam calls. Use the Missed Calls table to focus only on the handful tagged Lead or Customer.</li>
+<li><strong>Attic insulation and spray foam lead service demand</strong> — see the Service Interest panel; the bulk of identified jobs are Denver-metro.</li>
+<li><strong>The Search-LU-Denver campaign is paused.</strong> It produced 10 conversions at $961 each. "home insulation services" and "insulation removal" are the keywords actually converting; "energy saving insulation" spent $858 with none.</li>
+</ul></div>
+</div>
+
+<div class="footer">
+<strong>Data sources &amp; notes.</strong> Manual snapshot compiled May 14, 2026 from the LevelUP Insulation accounts. Set to <em>noindex / nofollow</em>; not discoverable by search engines.
+<div class="src">
+<span><i class="sw" style="background:var(--brand)"></i>Call Tracking Metrics — 141 call records</span>
+<span><i class="sw" style="background:var(--green)"></i>Lucky Orange — 36 conversion recordings</span>
+<span><i class="sw" style="background:var(--amber)"></i>Google Ads — Search-LU-Denver keywords</span>
+</div>
+<p style="margin-top:10px">Call "Type" tags and "Service" categories are an interpretation of each call's summary — use them as a guide. Each "Watch" link opens that specific session replay in Lucky Orange (you must be logged in). To refresh this dashboard, ask Claude to re-pull the data.</p>
+</div>
+</div>
+
+<script>
+var CALLS=[
+{d:"2026-05-13",t:"5:07 PM",n:"Loral Bongiorno",l:"Denver, CO",s:"Google Organic",dur:21,st:"Busy",ty:"Customer",note:"VM re: insulation job follow-up"},
+{d:"2026-05-13",t:"5:07 PM",n:"Loral Bongiorno",l:"Denver, CO",s:"Google Organic",dur:9,st:"No answer",ty:"Customer",note:"Brief 'thank you' message"},
+{d:"2026-05-13",t:"3:13 PM",n:"Phoenix Az",l:"Phoenix, AZ",s:"GMB — Aurora",dur:8,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"3:13 PM",n:"Phoenix Az",l:"Phoenix, AZ",s:"GMB — Denver",dur:4,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"3:12 PM",n:"Phoenix Az",l:"Phoenix, AZ",s:"GMB — Colorado Springs",dur:7,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"1:15 PM",n:"Max Torquato",l:"Boise, ID",s:"Google Organic",dur:101,st:"Answered",ty:"Lead",sv:"G",note:"Quote — ~400 sq ft, sending drawings"},
+{d:"2026-05-13",t:"9:43 AM",n:"Wireless Caller",l:"Ketchum, ID",s:"Google Organic",dur:10,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"9:42 AM",n:"Wireless Caller",l:"Ketchum, ID",s:"Google Organic",dur:6,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"9:33 AM",n:"Wireless Caller",l:"Ketchum, ID",s:"Google Organic",dur:10,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-13",t:"7:52 AM",n:"Mark Lewis",l:"Arlington, TX",s:"Google Organic",dur:9,st:"No answer",ty:"Lead",sv:"R",note:"From spray-foam removal resource page"},
+{d:"2026-05-13",t:"7:51 AM",n:"Mark Lewis",l:"Arlington, TX",s:"Google Organic",dur:12,st:"Answered",ty:"Lead",sv:"G",note:"VM left re: insulation job"},
+{d:"2026-05-13",t:"7:33 AM",n:"Clearwater Fl",l:"Clearwater, FL",s:"Google Organic",dur:55,st:"Answered",ty:"Spam",note:"Debt-settlement solicitor"},
+{d:"2026-05-12",t:"4:55 PM",n:"Phoenix Az",l:"Phoenix, AZ",s:"GBP — Aurora",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-12",t:"3:13 PM",n:"Studio 1 Inc",l:"Anchorage, AK",s:"Google Organic",dur:164,st:"Answered",ty:"Customer",sv:"G",note:"Insulation bid details, Boulder property"},
+{d:"2026-05-12",t:"2:36 PM",n:"Studio 1 Inc",l:"Anchorage, AK",s:"Google Organic",dur:361,st:"Answered",ty:"Customer",note:"Receipt request for 2022 work"},
+{d:"2026-05-12",t:"1:48 PM",n:"Humpty Dump Rol",l:"Denver, CO",s:"Google Organic",dur:62,st:"Answered",ty:"Other",note:"Wrong number"},
+{d:"2026-05-12",t:"12:52 PM",n:"Wireless Caller",l:"Fort Lupton, CO",s:"Google Organic",dur:174,st:"Answered",ty:"Customer",note:"Estimate appt no-show, rescheduled"},
+{d:"2026-05-12",t:"12:33 PM",n:"Wireless Caller",l:"Fort Lupton, CO",s:"Google Organic",dur:49,st:"Answered",ty:"Customer",note:"QA notice only"},
+{d:"2026-05-12",t:"11:46 AM",n:"Keenesburg Co",l:"Keenesburg, CO",s:"Google Organic",dur:4,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-05-12",t:"11:19 AM",n:"Marshall Bruce",l:"Denver, CO",s:"Google Organic",dur:58,st:"Answered",ty:"Other",note:"Asking who handles employee benefits"},
+{d:"2026-05-12",t:"10:28 AM",n:"Delray Beach Fl",l:"Delray Beach, FL",s:"Google Organic",dur:37,st:"Answered",ty:"Spam",note:"Asking for owner — solicitor"},
+{d:"2026-05-12",t:"10:02 AM",n:"Paige Hostetler",l:"West Palm Beach, FL",s:"Google Organic",dur:45,st:"Answered",ty:"Spam",note:"Following up on emails to owner"},
+{d:"2026-05-12",t:"7:35 AM",n:"Delray Beach Fl",l:"Delray Beach, FL",s:"Google Organic",dur:9,st:"Answered",ty:"Spam",note:"QA notice only"},
+{d:"2026-05-11",t:"4:13 PM",n:"Lopas Kaitlyn",l:"Colorado Springs, CO",s:"Google Organic",dur:69,st:"Answered",ty:"Customer",sv:"C",note:"Pest cleanup follow-up after crawl space job"},
+{d:"2026-05-11",t:"1:36 PM",n:"Delray Beach Fl",l:"Delray Beach, FL",s:"Google Organic",dur:154,st:"Answered",ty:"Spam",note:"Debt-advisory solicitor (CDA)"},
+{d:"2026-05-11",t:"12:17 PM",n:"Relief Business",l:"Nassau, NY",s:"Google Organic",dur:28,st:"Answered",ty:"Spam",note:"Solicitor"},
+{d:"2026-05-11",t:"12:13 PM",n:"Ss",l:"Schenectady, NY",s:"Google Organic",dur:51,st:"Answered",ty:"Spam",note:"Sigma Financial — lawsuit solicitation"},
+{d:"2026-05-11",t:"11:57 AM",n:"Brothers Road P",l:"Red Bank, NJ",s:"Google Organic",dur:16,st:"Answered",ty:"Spam",note:"Solicitor"},
+{d:"2026-05-11",t:"11:57 AM",n:"Brothers Road P",l:"Red Bank, NJ",s:"Google Organic",dur:9,st:"Answered",ty:"Spam",note:"Solicitor"},
+{d:"2026-05-11",t:"11:56 AM",n:"Potential Risk",l:"Creede, CO",s:"Google Organic",dur:36,st:"Answered",ty:"Spam",note:"Voicemail, no content"},
+{d:"2026-05-11",t:"6:06 AM",n:"Delray Beach Fl",l:"Delray Beach, FL",s:"Google Organic",dur:60,st:"Answered",ty:"Spam",note:"Voicemail, no content"},
+{d:"2026-05-11",t:"6:06 AM",n:"The Sarver Grou",l:"Locust, NC",s:"Google Organic",dur:10,st:"Answered",ty:"Spam",note:"QA notice only"},
+{d:"2026-05-08",t:"2:36 PM",n:"Bonomo, James",l:"Knoxville, TN",s:"Google Organic",dur:14,st:"Answered",ty:"Spam",note:"QA notice only"},
+{d:"2026-05-08",t:"1:30 PM",n:"Potential Risk",l:"Irvine, CA",s:"Google Organic",dur:107,st:"Answered",ty:"Spam",note:"Customer-financing sales pitch"},
+{d:"2026-05-08",t:"1:16 PM",n:"Simon",l:"Sarasota, FL",s:"Google Organic",dur:41,st:"Answered",ty:"Customer",note:"Asking about a Saturday appointment time"},
+{d:"2026-05-08",t:"12:44 PM",n:"Ringcentral In",l:"New York City, NY",s:"Google Organic",dur:0,st:"No answer",ty:"Spam",note:"No content"},
+{d:"2026-05-08",t:"12:41 PM",n:"Arlington Va",l:"Manhattan Beach, CA",s:"Google Organic",dur:33,st:"Answered",ty:"Lead",sv:"G",note:"Callback request — Claire Guthrie"},
+{d:"2026-05-08",t:"11:38 AM",n:"Wireless Caller",l:"Fort Lupton, CO",s:"Google Organic",dur:340,st:"Answered",ty:"Lead",sv:"A",note:"Estimate — Lakewood remodel, attic R-60"},
+{d:"2026-05-08",t:"10:15 AM",n:"Frederick Jones",l:"Plainfield, NJ",s:"Google Organic",dur:56,st:"Answered",ty:"Other",note:"Asked for Colin, left message"},
+{d:"2026-05-07",t:"2:33 PM",n:"Wireless Caller",l:"Marina Del Rey, CA",s:"GBP — Aurora",dur:9,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-07",t:"10:32 AM",n:"Wireless Caller",l:"Westminster, CO",s:"Google Organic",dur:56,st:"Answered",ty:"Customer",note:"Invoice request for last year's work"},
+{d:"2026-05-06",t:"10:42 AM",n:"Tayler Justin",l:"Denver, CO",s:"Google Organic",dur:75,st:"Answered",ty:"Lead",sv:"G",note:"Voicemail left after QA greeting"},
+{d:"2026-05-06",t:"10:03 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:46,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-05-06",t:"9:30 AM",n:"Casson Jeff",l:"Steamboat Springs, CO",s:"Google Organic",dur:45,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-05-06",t:"9:20 AM",n:"Laine Matthew",l:"Fort Collins, CO",s:"Google Organic",dur:51,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-05-05",t:"1:41 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:35,st:"Answered",ty:"Other",note:"Asked for Francisco, not urgent"},
+{d:"2026-05-05",t:"11:21 AM",n:"Avalos, Alexande",l:"Salina, KS",s:"Google Organic",dur:43,st:"Answered",ty:"Other",note:"Installer requesting callback"},
+{d:"2026-05-05",t:"11:06 AM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:112,st:"Answered",ty:"Customer",note:"Scheduling crew to fix baffles"},
+{d:"2026-05-05",t:"11:00 AM",n:"Sacramento Ca",l:"Sacramento, CA",s:"GBP — Fort Collins",dur:12,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-04",t:"4:15 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:100,st:"Answered",ty:"Customer",note:"Job complaint — wants photos/response"},
+{d:"2026-05-04",t:"2:43 PM",n:"Chicago Il",l:"Chicago, IL",s:"GBP — Colorado Springs",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-04",t:"2:37 PM",n:"Wireless Caller",l:"Littleton, CO",s:"GBP — Denver",dur:8,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-04",t:"2:05 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:777,st:"Answered",ty:"Customer",note:"Job dispute over insulation work"},
+{d:"2026-05-04",t:"2:05 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:12,st:"Answered",ty:"Customer",note:"Job dispute (cont.)"},
+{d:"2026-05-04",t:"12:30 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:4,st:"No answer",ty:"Customer",note:"No content"},
+{d:"2026-05-04",t:"12:29 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:47,st:"Answered",ty:"Customer",note:"Job dispute (cont.)"},
+{d:"2026-05-04",t:"12:05 PM",n:"Brendan Benecke",l:"Freehold, NJ",s:"Google Organic",dur:714,st:"Answered",ty:"Customer",note:"Job dispute — baffles disagreement"},
+{d:"2026-05-04",t:"8:01 AM",n:"Voss Larry",l:"Warrenton, MO",s:"Google Organic",dur:53,st:"Answered",ty:"Lead",sv:"O",note:"Bid update — room addition, Evergreen"},
+{d:"2026-05-02",t:"10:46 AM",n:"Vikas Reddy",l:"Lafayette, CO",s:"GBP — Denver",dur:16,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-05-02",t:"9:10 AM",n:"Loral Bongiorno",l:"Denver, CO",s:"Google Organic",dur:49,st:"Answered",ty:"Customer",note:"Follow-up on June 2025 service"},
+{d:"2026-05-01",t:"3:12 PM",n:"Frank Salinas",l:"Highlands Ranch, CO",s:"Google Organic",dur:282,st:"Answered",ty:"Lead",sv:"A",note:"Free attic insulation estimate — appt booked"},
+{d:"2026-05-01",t:"11:38 AM",n:"Lake Arbor Auto",l:"Westminster, CO",s:"Google Organic",dur:330,st:"Answered",ty:"Lead",sv:"O",note:"10,000 sq ft shop ceiling — inspection booked"},
+{d:"2026-05-01",t:"9:07 AM",n:"Wireless Caller",l:"Littleton, CO",s:"GBP — Denver",dur:55,st:"No answer",ty:"Customer",note:"Question about a lien notice"},
+{d:"2026-04-30",t:"1:40 PM",n:"J Canterbury",l:"Denver, CO",s:"Google Organic",dur:13,st:"Answered",ty:"Lead",sv:"S",note:"QA notice (see 1:11 PM call)"},
+{d:"2026-04-30",t:"1:34 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:183,st:"Answered",ty:"Lead",sv:"G",note:"3-min conversation, likely inquiry"},
+{d:"2026-04-30",t:"1:11 PM",n:"J Canterbury",l:"Denver, CO",s:"Google Organic",dur:483,st:"Answered",ty:"Lead",sv:"S",note:"Garage ceiling spray-foam estimate — account created"},
+{d:"2026-04-30",t:"11:17 AM",n:"Fort Lupton Co",l:"Fort Lupton, CO",s:"GBP — Arvada",dur:10,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-30",t:"11:11 AM",n:"Fisher Richard",l:"Denver, CO",s:"Google Organic",dur:222,st:"Answered",ty:"Other",note:"Asking where to buy mineral wool boards"},
+{d:"2026-04-29",t:"2:48 PM",n:"Wireless Caller",l:"Monterey, CA",s:"Google Organic",dur:101,st:"Answered",ty:"Other",note:"Job/hiring inquiry"},
+{d:"2026-04-29",t:"8:57 AM",n:"Kemetic Kisses",l:"Denver, CO",s:"Google Organic",dur:45,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-29",t:"7:45 AM",n:"Florence Co",l:"Florence, CO",s:"GBP — Colorado Springs",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-28",t:"1:14 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:44,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-28",t:"12:47 PM",n:"Kemetic Kisses",l:"Denver, CO",s:"Google Organic",dur:44,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-28",t:"9:47 AM",n:"Whitney Morin",l:"Castle Rock, CO",s:"Google Organic",dur:66,st:"Answered",ty:"Lead",sv:"G",note:"Callback request — Renee McLonacle"},
+{d:"2026-04-28",t:"9:21 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Arvada",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-28",t:"9:09 AM",n:"Carlisle Compan",l:"Denver, CO",s:"Google Organic",dur:37,st:"Answered",ty:"Spam",note:"QA notice, no caller response"},
+{d:"2026-04-28",t:"9:01 AM",n:"Jason Drost",l:"Loveland, CO",s:"Google Organic",dur:69,st:"Answered",ty:"Customer",note:"Cancelling an estimate appointment"},
+{d:"2026-04-28",t:"6:59 AM",n:"Buda Tx",l:"Buda, TX",s:"GBP — Fort Collins",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-28",t:"6:58 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Aurora",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-27",t:"2:39 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:157,st:"Answered",ty:"Lead",sv:"O",note:"Pipe insulation quote — commercial job"},
+{d:"2026-04-27",t:"11:25 AM",n:"Wireless Caller",l:"Austin, TX",s:"Google Organic",dur:17,st:"Answered",ty:"Other",note:"QA notice, no caller response"},
+{d:"2026-04-27",t:"9:51 AM",n:"Lake George Co",l:"Lake George, CO",s:"GBP — Colorado Springs",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-27",t:"9:24 AM",n:"Juanita Haynie",l:"Denver, CO",s:"Google Organic",dur:42,st:"Answered",ty:"Lead",sv:"G",note:"Inbound caller, QA notice captured"},
+{d:"2026-04-27",t:"9:19 AM",n:"Georgetown Co",l:"Georgetown, CO",s:"Google Organic",dur:17,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-26",t:"2:46 PM",n:"Kemetic Kisses",l:"Denver, CO",s:"Google Organic",dur:16,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-25",t:"9:19 AM",n:"Cheryl Smith",l:"Denver, CO",s:"Google Organic",dur:84,st:"Answered",ty:"Lead",sv:"O",note:"Vapor barrier quote — house under contract"},
+{d:"2026-04-24",t:"12:21 PM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Lakewood",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-24",t:"10:19 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:180,st:"Answered",ty:"Other",note:"HVAC mgr asking about training/subcontracting"},
+{d:"2026-04-24",t:"10:04 AM",n:"Phoenix Az",l:"Phoenix, AZ",s:"Google Organic",dur:34,st:"Answered",ty:"Other",note:"Testing phone number"},
+{d:"2026-04-24",t:"7:13 AM",n:"Milwaukee Wi",l:"Milwaukee, WI",s:"GBP — Fort Collins",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-24",t:"7:09 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Aurora",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-23",t:"3:28 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:136,st:"Answered",ty:"Lead",sv:"G",note:"Bid follow-up, project on hold pending roof"},
+{d:"2026-04-23",t:"9:18 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Arvada",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-23",t:"9:05 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:44,st:"Answered",ty:"Customer",note:"Mistaken Zelle payment, callback request"},
+{d:"2026-04-23",t:"8:38 AM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:38,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-23",t:"8:07 AM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:37,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-23",t:"7:25 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Lakewood",dur:18,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-23",t:"6:59 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Aurora",dur:16,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-22",t:"6:24 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:203,st:"Answered",ty:"Other",note:"Odd unrelated emotional voicemail"},
+{d:"2026-04-22",t:"4:51 PM",n:"Erich Byers",l:"Davenport, IA",s:"Google Organic",dur:39,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-22",t:"2:18 PM",n:"Owenton Ky",l:"Owenton, KY",s:"GBP — Fort Collins",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-22",t:"1:02 PM",n:"Wireless Caller",l:"Glen Burnie, MD",s:"Google Organic",dur:485,st:"Answered",ty:"Lead",sv:"S",note:"Spray-foam estimate for a 28x12 shed"},
+{d:"2026-04-22",t:"12:43 PM",n:"Lake George Co",l:"Lake George, CO",s:"GBP — Colorado Springs",dur:18,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-22",t:"11:51 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:297,st:"Answered",ty:"Lead",sv:"G",note:"Inspection request — 1889 duplex, Wheat Ridge"},
+{d:"2026-04-22",t:"10:44 AM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:37,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-22",t:"10:41 AM",n:"Andy Scott",l:"Denver, CO",s:"Google Organic",dur:67,st:"Answered",ty:"Lead",sv:"G",note:"Callback request left"},
+{d:"2026-04-22",t:"8:20 AM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:38,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-21",t:"2:42 PM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Arvada",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-21",t:"12:15 PM",n:"Pamala Boyden",l:"Salida, CO",s:"GBP — Colorado Springs",dur:38,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-20",t:"3:41 PM",n:"Miller Monica",l:"Waxahachie, TX",s:"GBP — Lakewood",dur:13,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-20",t:"10:22 AM",n:"Judy Latham",l:"Centennial, CO",s:"Google Organic",dur:10,st:"Answered",ty:"Lead",sv:"A",note:"QA notice (see 10:18 AM call)"},
+{d:"2026-04-20",t:"10:18 AM",n:"Judy Latham",l:"Centennial, CO",s:"Google Organic",dur:48,st:"Answered",ty:"Lead",sv:"A",note:"Callback request — attic insulation install"},
+{d:"2026-04-20",t:"9:28 AM",n:"Denise Satele",l:"Denver, CO",s:"Google Organic",dur:39,st:"Answered",ty:"Lead",sv:"G",note:"Inbound caller, QA notice captured"},
+{d:"2026-04-20",t:"8:25 AM",n:"Priscilla Moren",l:"Denver, CO",s:"Google Organic",dur:252,st:"Answered",ty:"Lead",sv:"C",note:"Estimate follow-up — crawl space rodent-proofing"},
+{d:"2026-04-20",t:"8:20 AM",n:"Jason Drost",l:"Loveland, CO",s:"Google Organic",dur:218,st:"Answered",ty:"Lead",sv:"O",note:"On-site estimate booked — damaged shop insulation"},
+{d:"2026-04-20",t:"8:03 AM",n:"Priscilla Moren",l:"Denver, CO",s:"Google Organic",dur:303,st:"Answered",ty:"Lead",sv:"C",note:"Estimate request — crawlspace encapsulation, Thornton"},
+{d:"2026-04-20",t:"8:03 AM",n:"Priscilla Moren",l:"Denver, CO",s:"Google Organic",dur:16,st:"Answered",ty:"Lead",sv:"C",note:"QA notice (see 8:03 AM call)"},
+{d:"2026-04-18",t:"11:37 AM",n:"Kemetic Kisses",l:"Denver, CO",s:"Google Organic",dur:10,st:"Answered",ty:"Other",note:"QA notice only"},
+{d:"2026-04-17",t:"10:18 AM",n:"Kevin Ransom",l:"Longmont, CO",s:"Google Organic",dur:36,st:"Answered",ty:"Lead",sv:"G",note:"Installation estimate request"},
+{d:"2026-04-17",t:"10:00 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:95,st:"Answered",ty:"Customer",note:"Rescheduling appointment due to snow"},
+{d:"2026-04-17",t:"9:57 AM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:100,st:"Answered",ty:"Customer",note:"Confirming an existing appointment"},
+{d:"2026-04-17",t:"7:00 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Lakewood",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-16",t:"9:09 PM",n:"Wireless Caller",l:"Denver, CO",s:"Google Organic",dur:2,st:"No answer",ty:"Other",note:"No content"},
+{d:"2026-04-16",t:"3:33 PM",n:"Bowling Erica",l:"Seattle, WA",s:"Google Organic",dur:248,st:"Answered",ty:"Lead",sv:"A",note:"Quote — attic insulation + rodent, tech booked"},
+{d:"2026-04-16",t:"12:57 PM",n:"Davidson, Ryan",l:"Denver, CO",s:"Google Organic",dur:160,st:"Answered",ty:"Customer",note:"Scheduling after signing estimate, deposit taken"},
+{d:"2026-04-16",t:"12:47 PM",n:"Revers, Matthew",l:"Littleton, CO",s:"Google Organic",dur:72,st:"Answered",ty:"Customer",note:"Garage/attic ceiling damage — wants docs"},
+{d:"2026-04-16",t:"12:22 PM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:37,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-16",t:"11:33 AM",n:"Tim Jenkins",l:"Denver, CO",s:"Google Organic",dur:17,st:"Answered",ty:"Lead",sv:"G",note:"Inbound caller, QA notice captured"},
+{d:"2026-04-16",t:"10:59 AM",n:"Davidson, Ryan",l:"Denver, CO",s:"Google Organic",dur:15,st:"Answered",ty:"Customer",note:"QA notice (see 12:57 PM call)"},
+{d:"2026-04-16",t:"7:45 AM",n:"Reyes, Juan",l:"Denver, CO",s:"Google Organic",dur:11,st:"Answered",ty:"Lead",sv:"G",note:"Inbound caller, QA notice captured"},
+{d:"2026-04-16",t:"7:40 AM",n:"Wireless Caller",l:"Aurora, CO",s:"Google Organic",dur:47,st:"Answered",ty:"Lead",sv:"G",note:"Voicemail left"},
+{d:"2026-04-16",t:"6:59 AM",n:"Milford Mi",l:"Milford, MI",s:"GBP — Fort Collins",dur:19,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-16",t:"6:56 AM",n:"Arvada",l:"Fort Lupton, CO",s:"GBP — Aurora",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-15",t:"2:39 PM",n:"Florence Co",l:"Florence, CO",s:"GBP — Colorado Springs",dur:17,st:"No answer",ty:"Spam",note:"GBP voicemail spam"},
+{d:"2026-04-15",t:"1:26 PM",n:"Martinez Anthon",l:"Denver, CO",s:"Google Organic",dur:51,st:"Answered",ty:"Lead",sv:"O",note:"Mobile-home insulation question, callback left"},
+{d:"2026-04-15",t:"12:23 PM",n:"Ronald Hikida",l:"Ladera Ranch, CA",s:"Google Organic",dur:368,st:"Answered",ty:"Lead",sv:"S",note:"Closed-cell spray foam estimate — booked, Erie"},
+{d:"2026-04-15",t:"10:43 AM",n:"Colorado Spg Co",l:"Alamosa, CO",s:"GBP — Colorado Springs",dur:37,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-15",t:"9:29 AM",n:"Lewis, Paul",l:"Denver, CO",s:"Google Organic",dur:176,st:"Answered",ty:"Lead",sv:"A",note:"Bid/inspection — raise attic insulation, booked"},
+{d:"2026-04-15",t:"8:45 AM",n:"Connors, Frank",l:"Perth Amboy, NJ",s:"Google Organic",dur:401,st:"Answered",ty:"Lead",sv:"R",note:"Insulation removal + reinstall quote, Wheat Ridge"},
+{d:"2026-04-15",t:"8:34 AM",n:"Colorado Spg Co",l:"Colorado Springs, CO",s:"GBP — Colorado Springs",dur:37,st:"No answer",ty:"Spam",note:"Google listing scam call"},
+{d:"2026-04-15",t:"7:29 AM",n:"Lewis, Paul",l:"Denver, CO",s:"Google Organic",dur:17,st:"Answered",ty:"Lead",sv:"A",note:"QA notice (see 9:29 AM call)"}
+];
+var RIDS=[
+"1778642263428-e3171ff3595ca9f1","1778603756307-159368ced9d35fe7","1778529802262-3f94e22621ba74ec",
+"1778203448478-672c7d600eb1894c","1778084589771-2bae56bf4916a0cd","1778022983489-528553563d942b58",
+"1778008718378-c92e6224ba274d80","1778004305556-1224cd7c02ef5059","1777912563822-c39fd89c24f986a4",
+"1777767064028-8137ff9426550bfa","1777674490699-24969c0ab20c2f99","1777673568952-4c53d824d5abdeaf",
+"1777671171381-b647cb3c9eea21e5","1777583471996-cd4a5c48978b335b","1777328629313-d17f43f8d2622414",
+"1777323949019-bb0c3b626d174ccd","1777321286888-6823a40083367922","1777293952198-d1f477c0ef0e3fac",
+"1776989929370-cd4b520cbf5de5d7","1776956253630-0d9c94a821990d08","1776901809389-e040442e55408158",
+"1776870869191-ddebd8665d69d95b","1776865621411-36fc0daedcf6e62d","1776801550120-65f05a6426688035",
+"1776800843994-76e7d98a862fdae3","1776798916236-b62fb35a5ed66ad1","1776643339585-c39f0197337d70dc",
+"1776564604161-7525d6029873b0eb","1776460929280-caf7505028233420","1776432395939-161ae3d3d4da6031",
+"1776363536096-391fa9fb1c0612b1","1776358554873-fa6334749aae16e4","1776350441506-6823ecf43a4fec29",
+"1776267430277-4fb3b27e9a345e31","1776255102966-e0a7f92b0e6770a7","1776180975749-abe1e61f7be7b9b5"
+];
+var RECS=[
+{d:"2026-05-13",t:"8:47 AM",loc:", Colorado",src:"Google",land:"/",pg:3,dur:"5m",kw:""},
+{d:"2026-05-12",t:"10:05 PM",loc:"Sedro-Woolley, WA",src:"Direct Link",land:"/about/",pg:3,dur:"7m",kw:""},
+{d:"2026-05-12",t:"1:33 AM",loc:"Longmont, CO",src:"www.yelp.com",land:"/",pg:3,dur:"9m",kw:""},
+{d:"2026-05-08",t:"6:54 AM",loc:"Denver, CO",src:"Direct Link",land:"/",pg:3,dur:"1m",kw:""},
+{d:"2026-05-06",t:"9:53 PM",loc:"Denver, CO",src:"Google",land:"/",pg:4,dur:"3m",kw:""},
+{d:"2026-05-06",t:"4:46 AM",loc:"Denver, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"3s",kw:""},
+{d:"2026-05-06",t:"12:48 AM",loc:"Denver, CO",src:"app.hvacree.net",land:"/",pg:3,dur:"5m",kw:""},
+{d:"2026-05-05",t:"11:35 PM",loc:"Denver, CO",src:"Google",land:"/",pg:4,dur:"1m",kw:""},
+{d:"2026-05-04",t:"10:06 PM",loc:"Denver, CO",src:"Google PPC",land:"/",pg:5,dur:"1m",kw:"insulation removal"},
+{d:"2026-05-03",t:"5:41 AM",loc:"Denver, CO",src:"DuckDuckGo",land:"/arvada-insulation-removal/",pg:4,dur:"12m",kw:""},
+{d:"2026-05-02",t:"3:58 AM",loc:"Highlands Ranch, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"4s",kw:""},
+{d:"2026-05-02",t:"3:42 AM",loc:"Parker, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"3s",kw:""},
+{d:"2026-05-02",t:"3:02 AM",loc:"Highlands Ranch, CO",src:"Google",land:"/resource/best-insulation-for-attics/",pg:2,dur:"7m",kw:""},
+{d:"2026-05-01",t:"2:41 AM",loc:"Selma, NC",src:"Google",land:"/",pg:5,dur:"59s",kw:""},
+{d:"2026-04-28",t:"3:53 AM",loc:"Denver, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"5s",kw:""},
+{d:"2026-04-28",t:"2:35 AM",loc:"Denver, CO",src:"Google",land:"/",pg:3,dur:"5m",kw:""},
+{d:"2026-04-28",t:"1:51 AM",loc:"Denver, CO",src:"Google PPC",land:"/",pg:3,dur:"5m",kw:"insulation contractors denver"},
+{d:"2026-04-27",t:"6:15 PM",loc:"Denver, CO",src:"Direct Link",land:"/denver-attic-insulation/",pg:3,dur:"9m",kw:""},
+{d:"2026-04-24",t:"5:48 AM",loc:"Houston, TX",src:"Google",land:"/spray-foam-insulation/",pg:3,dur:"6m",kw:""},
+{d:"2026-04-23",t:"8:27 PM",loc:"Castle Rock, CO",src:"Google PPC",land:"/",pg:3,dur:"18m",kw:"insulation removal"},
+{d:"2026-04-23",t:"5:20 AM",loc:"Denver, CO",src:"Bing",land:"/boulder-pest-control-insulation/",pg:3,dur:"5m",kw:""},
+{d:"2026-04-22",t:"8:44 PM",loc:"Denver, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"6s",kw:""},
+{d:"2026-04-22",t:"7:17 PM",loc:"Denver, CO",src:"Google PPC",land:"/",pg:3,dur:"3m",kw:"insulation companies denver"},
+{d:"2026-04-22",t:"1:29 AM",loc:"Lakewood, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"-",kw:""},
+{d:"2026-04-22",t:"1:17 AM",loc:"Denver, CO",src:"Direct Link",land:"/thank-you/",pg:1,dur:"7s",kw:""},
+{d:"2026-04-22",t:"12:45 AM",loc:"Lakewood, CO",src:"Google",land:"/",pg:3,dur:"2m",kw:""},
+{d:"2026-04-20",t:"5:32 AM",loc:"Aurora, CO",src:"m.yelp.com",land:"/",pg:2,dur:"5m",kw:""},
+{d:"2026-04-19",t:"7:40 AM",loc:"Denver, CO",src:"Google",land:"/",pg:4,dur:"3m",kw:""},
+{d:"2026-04-18",t:"2:52 AM",loc:"Arvada, CO",src:"Google PPC",land:"/",pg:4,dur:"17m",kw:"home insulation services"},
+{d:"2026-04-17",t:"6:56 PM",loc:"Denver, CO",src:"Google",land:"/",pg:3,dur:"2m",kw:""},
+{d:"2026-04-16",t:"11:48 PM",loc:"Aurora, CO",src:"Google PPC",land:"/",pg:3,dur:"1m",kw:"home insulation services denver"},
+{d:"2026-04-16",t:"10:25 PM",loc:"Denver, CO",src:"Google PPC",land:"/",pg:4,dur:"3m",kw:"home insulation services"},
+{d:"2026-04-16",t:"8:10 PM",loc:"Denver, CO",src:"Direct Link",land:"/",pg:5,dur:"5m",kw:""},
+{d:"2026-04-15",t:"9:07 PM",loc:"Parker, CO",src:"Direct Link",land:"/",pg:3,dur:"4m",kw:""},
+{d:"2026-04-15",t:"5:41 PM",loc:"Orem, UT",src:"Direct Link",land:"/",pg:2,dur:"1m",kw:""},
+{d:"2026-04-14",t:"9:06 PM",loc:", Colorado",src:"Google PPC",land:"/denver-spray-foam-insulation/",pg:3,dur:"1m",kw:"spray foam insulation for houses"}
+];
+RECS.forEach(function(r,i){r.rid=RIDS[i];});
+var KEYWORDS=[
+{kw:'"attic insulation"',match:"Phrase",impr:801,clicks:42,ir:5.24,cpc:34.32,cost:1441.38,conv:0,cr:0,cpa:0},
+{kw:'"home insulation services"',match:"Phrase",impr:957,clicks:40,ir:4.18,cpc:30.69,cost:1227.46,conv:3,cr:7.50,cpa:409.15},
+{kw:'"home insulation installation"',match:"Phrase",impr:980,clicks:30,ir:3.06,cpc:31.03,cost:930.82,conv:0,cr:0,cpa:0},
+{kw:'"energy saving insulation"',match:"Phrase",impr:1847,clicks:29,ir:1.57,cpc:29.58,cost:857.88,conv:0,cr:0,cpa:0},
+{kw:'"spray foam insulation for houses"',match:"Phrase",impr:753,clicks:27,ir:3.59,cpc:32.77,cost:884.83,conv:0,cr:0,cpa:0},
+{kw:"[spray foam insulation]",match:"Exact",impr:314,clicks:16,ir:5.10,cpc:30.89,cost:494.22,conv:0,cr:0,cpa:0},
+{kw:'"energy efficient insulation"',match:"Phrase",impr:795,clicks:15,ir:1.89,cpc:30.94,cost:464.09,conv:0,cr:0,cpa:0},
+{kw:'"insulation removal"',match:"Phrase",impr:126,clicks:14,ir:11.11,cpc:24.23,cost:339.18,conv:1,cr:7.14,cpa:339.18},
+{kw:'"insulation installers"',match:"Phrase",impr:200,clicks:12,ir:6.00,cpc:32.91,cost:394.92,conv:0,cr:0,cpa:0},
+{kw:'"wall insulation installation"',match:"Phrase",impr:192,clicks:9,ir:4.69,cpc:26.97,cost:242.76,conv:0,cr:0,cpa:0}
+];
+var LO_PLAY_URL="https://classic.luckyorange.com/v3/dash.php#/recordings/play/329247-";
+var AD_SPEND=9614.48;
+var SVNAMES={A:"Attic Insulation",S:"Spray Foam",C:"Crawl Space / Encapsulation",R:"Insulation Removal",O:"Other Insulation",G:"General Inquiry"};
+var SVCOLOR={A:"#0e5fae",S:"#6a4bc4",C:"#18a957",R:"#e8920c",O:"#d2473b",G:"#8a96a5"};
+var METRO=["Denver","Aurora","Lakewood","Littleton","Arvada","Westminster","Centennial","Highlands Ranch","Thornton","Parker","Wheat Ridge","Commerce City","Fort Lupton","Lafayette","Brighton","Englewood","Castle Rock","Longmont","Loveland","Boulder"];
+
+function pad(n){return n<10?"0"+n:""+n;}
+function parseISO(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
+function fmtDate(s){var dt=parseISO(s);var m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return m[dt.getMonth()]+" "+dt.getDate();}
+function weekKey(s){var dt=parseISO(s);var day=(dt.getDay()+6)%7;var mon=new Date(dt);mon.setDate(dt.getDate()-day);return mon.getFullYear()+"-"+pad(mon.getMonth()+1)+"-"+pad(mon.getDate());}
+function weekLabel(k){var mon=parseISO(k);var sun=new Date(mon);sun.setDate(mon.getDate()+6);var m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return "Week of "+m[mon.getMonth()]+" "+mon.getDate()+" – "+m[sun.getMonth()]+" "+sun.getDate();}
+function monthKey(s){return s.substring(0,7);}
+function monthLabel(k){var p=k.split("-");var m=["January","February","March","April","May","June","July","August","September","October","November","December"];return m[+p[1]-1]+" "+p[0];}
+function dur(sec){var m=Math.floor(sec/60),s=sec%60;return m+":"+pad(s);}
+function esc(x){return (""+x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function uniqSorted(a){var o={};a.forEach(function(x){o[x]=1;});return Object.keys(o).sort();}
+function region(loc){
+  if(!/, ?CO|Colorado/.test(loc))return "Out of State";
+  var city=loc.split(",")[0].trim();
+  for(var i=0;i<METRO.length;i++){if(city.indexOf(METRO[i])>=0)return "Denver Metro";}
+  return "Other Colorado";
+}
+function buildPeriods(data,mode){
+  if(mode==="day")return uniqSorted(data.map(function(r){return r.d;}));
+  if(mode==="week")return uniqSorted(data.map(function(r){return weekKey(r.d);}));
+  if(mode==="month")return uniqSorted(data.map(function(r){return monthKey(r.d);}));
+  return [];
+}
+function filterData(data,mode,period){
+  if(mode==="all"||!period)return data.slice();
+  return data.filter(function(r){
+    if(mode==="day")return r.d===period;
+    if(mode==="week")return weekKey(r.d)===period;
+    if(mode==="month")return monthKey(r.d)===period;
+    return true;
+  });
+}
+function periodLabel(mode,period){
+  if(mode==="all"||!period)return "(all 30 days)";
+  if(mode==="day")return "("+fmtDate(period)+", "+period.substring(0,4)+")";
+  if(mode==="week")return "("+weekLabel(period)+")";
+  if(mode==="month")return "("+monthLabel(period)+")";
+  return "";
+}
+function barRow(label,val,max,color){
+  var pct=max>0?Math.round(val/max*100):0;
+  return '<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;font-size:12px"><span>'+esc(label)+'</span><span style="font-weight:700">'+val+'</span></div><div class="barmini"><i style="width:'+pct+'%;background:'+color+'"></i></div></div>';
+}
+function kpi(cls,label,val,note){return '<div class="kpi '+cls+'"><div class="label">'+esc(label)+'</div><div class="value">'+val+'</div><div class="note">'+esc(note)+'</div></div>';}
+function money(n){return "$"+Math.round(n).toLocaleString();}
+function attachSort(tableId,getData,render){
+  var ths=document.querySelectorAll("#"+tableId+" thead th[data-k]");
+  ths.forEach(function(th){
+    th.addEventListener("click",function(){
+      var k=th.getAttribute("data-k");
+      var st=th._dir==="asc"?"desc":"asc";th._dir=st;
+      var d=getData();
+      d.sort(function(a,b){
+        var x=a[k],y=b[k];
+        if(typeof x==="string"&&typeof y==="string"){return st==="asc"?x.localeCompare(y):y.localeCompare(x);}
+        return st==="asc"?(x>y?1:x<y?-1:0):(x<y?1:x>y?-1:0);
+      });
+      render(d);
+    });
+  });
+}
+
+var callState={mode:"all",period:null,data:CALLS.slice()};
+function renderCalls(){
+  var d=filterData(CALLS,callState.mode,callState.period);
+  callState.data=d;
+  var leads=d.filter(function(r){return r.ty==="Lead";}).length;
+  var ans=d.filter(function(r){return r.st==="Answered";}).length;
+  var spam=d.filter(function(r){return r.ty==="Spam";}).length;
+  document.getElementById("callKpis").innerHTML=
+    kpi("k-call","Calls",d.length,"in selected period")+
+    kpi("k-call","Genuine Leads",leads,(d.length?Math.round(leads/d.length*100):0)+"% of calls")+
+    kpi("k-call","Answered",ans,(d.length?Math.round(ans/d.length*100):0)+"% answer rate")+
+    kpi("k-call","Spam / Junk",spam,(d.length?Math.round(spam/d.length*100):0)+"% of calls");
+  document.getElementById("callRangeLbl").textContent=periodLabel(callState.mode,callState.period);
+  renderCallTable(d);
+  var types=["Lead","Spam","Customer","Other"],cmap={Lead:"var(--green)",Spam:"var(--red)",Customer:"var(--brand)",Other:"var(--grey)"};
+  var mx=document.getElementById("callMix");mx.innerHTML="";
+  var maxT=Math.max.apply(null,types.map(function(t){return d.filter(function(r){return r.ty===t;}).length;}).concat([1]));
+  types.forEach(function(t){var c=d.filter(function(r){return r.ty===t;}).length;mx.innerHTML+=barRow(t,c,maxT,cmap[t]);});
+  var srcCount={};d.forEach(function(r){srcCount[r.s]=(srcCount[r.s]||0)+1;});
+  var srcArr=Object.keys(srcCount).map(function(k){return [k,srcCount[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,7);
+  var maxS=srcArr.length?srcArr[0][1]:1;
+  var sc=document.getElementById("callSources");sc.innerHTML="";
+  srcArr.forEach(function(p){sc.innerHTML+=barRow(p[0],p[1],maxS,"var(--brand)");});
+  document.getElementById("callCount").textContent=d.length+" call"+(d.length===1?"":"s")+" shown.";
+  renderSvc(d);renderMissed(d);
+}
+function renderCallTable(d){
+  var tb=document.getElementById("callBody");
+  if(!d.length){tb.innerHTML='<tr><td colspan="9" class="empty">No calls in this period.</td></tr>';return;}
+  var tyCls={Lead:"lead",Spam:"spam",Customer:"cust",Other:"other"};
+  var stCls={"Answered":"ans","No answer":"noans","Busy":"busy"};
+  tb.innerHTML=d.map(function(r){
+    return "<tr><td>"+fmtDate(r.d)+"</td><td class='muted'>"+esc(r.t)+"</td><td><strong>"+esc(r.n)+"</strong></td>"+
+      "<td class='muted'>"+esc(r.l)+"</td><td>"+esc(r.s)+"</td><td class='num'>"+dur(r.dur)+"</td>"+
+      "<td><span class='pill "+(stCls[r.st]||"other")+"'>"+esc(r.st)+"</span></td>"+
+      "<td><span class='pill "+tyCls[r.ty]+"'>"+esc(r.ty)+"</span></td><td class='muted'>"+esc(r.note)+"</td></tr>";
+  }).join("");
+}
+function renderSvc(d){
+  var sv={};d.forEach(function(r){if(r.sv){sv[r.sv]=(sv[r.sv]||0)+1;}});
+  var order=["A","S","C","R","O","G"];
+  var max=Math.max.apply(null,order.map(function(k){return sv[k]||0;}).concat([1]));
+  var st=document.getElementById("svcType");st.innerHTML="";var any=false;
+  order.forEach(function(k){if(sv[k]){any=true;st.innerHTML+=barRow(SVNAMES[k],sv[k],max,SVCOLOR[k]);}});
+  if(!any)st.innerHTML='<div class="empty">No identified-service calls in this period.</div>';
+  var rg={};d.forEach(function(r){var x=region(r.l);rg[x]=(rg[x]||0)+1;});
+  var ra=Object.keys(rg).map(function(k){return [k,rg[k]];}).sort(function(a,b){return b[1]-a[1];});
+  var rmax=ra.length?ra[0][1]:1;
+  var ae=document.getElementById("svcArea");ae.innerHTML="";
+  var acol={"Denver Metro":"var(--brand)","Other Colorado":"var(--green)","Out of State":"var(--grey)"};
+  ra.forEach(function(p){ae.innerHTML+=barRow(p[0],p[1],rmax,acol[p[0]]||"var(--brand)");});
+  if(!ra.length)ae.innerHTML='<div class="empty">No calls in this period.</div>';
+}
+function renderMissed(d){
+  var miss=d.filter(function(r){return r.st!=="Answered";});
+  var spam=miss.filter(function(r){return r.ty==="Spam";}).length;
+  var real=miss.filter(function(r){return r.ty==="Lead"||r.ty==="Customer";}).length;
+  var other=miss.length-spam-real;
+  document.getElementById("missKpis").innerHTML=
+    kpi("k-miss","Missed Calls",miss.length,"unanswered or busy")+
+    kpi("k-miss","Likely Real",real,"tagged Lead or Customer — follow up")+
+    kpi("k-miss","Spam / Junk",spam,"GBP voicemail &amp; scam calls")+
+    kpi("k-miss","Unclear",other,"no content / other");
+  document.getElementById("missRangeLbl").textContent=periodLabel(callState.mode,callState.period);
+  var tb=document.getElementById("missBody");
+  var tyCls={Lead:"lead",Spam:"spam",Customer:"cust",Other:"other"};
+  var stCls={"No answer":"noans","Busy":"busy"};
+  var rank={Lead:0,Customer:1,Other:2,Spam:3};
+  miss=miss.slice().sort(function(a,b){return rank[a.ty]-rank[b.ty];});
+  if(!miss.length){tb.innerHTML='<tr><td colspan="8" class="empty">No missed calls in this period.</td></tr>';}
+  else{
+    tb.innerHTML=miss.map(function(r){
+      return "<tr><td>"+fmtDate(r.d)+"</td><td class='muted'>"+esc(r.t)+"</td><td><strong>"+esc(r.n)+"</strong></td>"+
+        "<td class='muted'>"+esc(r.l)+"</td><td>"+esc(r.s)+"</td>"+
+        "<td><span class='pill "+(stCls[r.st]||"noans")+"'>"+esc(r.st)+"</span></td>"+
+        "<td><span class='pill "+tyCls[r.ty]+"'>"+esc(r.ty)+"</span></td><td class='muted'>"+esc(r.note)+"</td></tr>";
+    }).join("");
+  }
+  document.getElementById("missCount").textContent=miss.length+" missed call"+(miss.length===1?"":"s")+" — "+real+" likely worth a callback.";
+}
+
+var recState={mode:"all",period:null,data:RECS.slice()};
+function renderRecs(){
+  var d=filterData(RECS,recState.mode,recState.period);
+  recState.data=d;
+  var paid=d.filter(function(r){return r.src==="Google PPC";}).length;
+  var organic=d.filter(function(r){return r.src==="Google"||r.src==="Bing"||r.src==="DuckDuckGo";}).length;
+  var avgPg=d.length?(d.reduce(function(a,r){return a+r.pg;},0)/d.length).toFixed(1):"0";
+  document.getElementById("recKpis").innerHTML=
+    kpi("k-rec","Form Conversions",d.length,"Thank-You page sessions")+
+    kpi("k-rec","From Paid Search",paid,"Search-LU-Denver campaign")+
+    kpi("k-rec","From Organic Search",organic,"Google / Bing / DuckDuckGo")+
+    kpi("k-rec","Avg Pages / Session",avgPg,"before converting");
+  document.getElementById("recRangeLbl").textContent=periodLabel(recState.mode,recState.period);
+  renderRecTable(d);
+  var sc={};d.forEach(function(r){sc[r.src]=(sc[r.src]||0)+1;});
+  var sa=Object.keys(sc).map(function(k){return [k,sc[k]];}).sort(function(a,b){return b[1]-a[1];});
+  var ms=sa.length?sa[0][1]:1;var se=document.getElementById("recSources");se.innerHTML="";
+  sa.forEach(function(p){se.innerHTML+=barRow(p[0],p[1],ms,"var(--green)");});
+  var lc={};d.forEach(function(r){lc[r.land]=(lc[r.land]||0)+1;});
+  var la=Object.keys(lc).map(function(k){return [k,lc[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+  var ml=la.length?la[0][1]:1;var le=document.getElementById("recLanding");le.innerHTML="";
+  la.forEach(function(p){le.innerHTML+=barRow(p[0],p[1],ml,"var(--green)");});
+  document.getElementById("recCount").textContent=d.length+" conversion recording"+(d.length===1?"":"s")+" shown.";
+}
+function renderRecTable(d){
+  var tb=document.getElementById("recBody");
+  if(!d.length){tb.innerHTML='<tr><td colspan="9" class="empty">No conversion recordings in this period.</td></tr>';return;}
+  tb.innerHTML=d.map(function(r){
+    var srcPill=r.src==="Google PPC"?"<span class='pill paid'>Google PPC</span>":esc(r.src);
+    return "<tr><td>"+fmtDate(r.d)+"</td><td class='muted'>"+esc(r.t)+"</td><td>"+esc(r.loc)+"</td>"+
+      "<td>"+srcPill+"</td><td class='muted'>"+esc(r.land)+"</td><td class='num'>"+r.pg+"</td>"+
+      "<td class='muted'>"+esc(r.dur)+"</td>"+
+      "<td>"+(r.kw?"<span class='pill amber'>"+esc(r.kw)+"</span>":"<span class='muted'>—</span>")+"</td>"+
+      "<td><a href='"+LO_PLAY_URL+r.rid+"' target='_blank' rel='noopener'>Watch &#8599;</a></td></tr>";
+  }).join("");
+}
+
+function renderKw(d){
+  var tb=document.getElementById("kwBody");
+  tb.innerHTML=d.map(function(r){
+    return "<tr><td><strong>"+esc(r.kw)+"</strong></td><td class='muted'>"+esc(r.match)+"</td>"+
+      "<td class='num'>"+r.impr.toLocaleString()+"</td><td class='num'>"+r.clicks+"</td>"+
+      "<td class='num'>"+r.ir.toFixed(2)+"%</td><td class='num'>$"+r.cpc.toFixed(2)+"</td>"+
+      "<td class='num'>$"+r.cost.toLocaleString(undefined,{minimumFractionDigits:2})+"</td>"+
+      "<td class='num'>"+(r.conv>0?"<span class='pill green'>"+r.conv+"</span>":"<span class='muted'>0</span>")+"</td>"+
+      "<td class='num'>"+r.cr.toFixed(2)+"%</td><td class='num'>"+(r.cpa>0?"$"+r.cpa.toFixed(2):"—")+"</td></tr>";
+  }).join("");
+}
+
+var QDATA=RECS.filter(function(r){return r.kw;});
+var qState={mode:"all",period:null};
+function renderQ(){
+  var d=filterData(QDATA,qState.mode,qState.period);
+  var tb=document.getElementById("qBody");
+  if(!d.length){tb.innerHTML='<tr><td colspan="7" class="empty">No paid-search conversions in this period.</td></tr>';}
+  else{
+    tb.innerHTML=d.map(function(r){
+      return "<tr><td>"+fmtDate(r.d)+"</td><td class='muted'>"+esc(r.t)+"</td>"+
+        "<td><span class='pill amber'>"+esc(r.kw)+"</span></td><td class='muted'>"+esc(r.land)+"</td>"+
+        "<td>"+esc(r.loc)+"</td><td class='num'>"+r.pg+"</td>"+
+        "<td><a href='"+LO_PLAY_URL+r.rid+"' target='_blank' rel='noopener'>Watch &#8599;</a></td></tr>";
+    }).join("");
+  }
+  document.getElementById("qRangeLbl").textContent=periodLabel(qState.mode,qState.period);
+  document.getElementById("qCount").textContent=d.length+" converting paid search "+(d.length===1?"query":"queries")+" shown.";
+}
+
+function wireFilter(modeId,periodId,resetId,state,data,renderFn){
+  var modeSel=document.getElementById(modeId),perSel=document.getElementById(periodId),reset=document.getElementById(resetId);
+  modeSel.addEventListener("change",function(){
+    state.mode=modeSel.value;state.period=null;
+    if(state.mode==="all"){perSel.style.display="none";}
+    else{
+      var periods=buildPeriods(data,state.mode);
+      perSel.innerHTML=periods.map(function(p){
+        var lbl=state.mode==="day"?(fmtDate(p)+", "+p.substring(0,4)):state.mode==="week"?weekLabel(p):monthLabel(p);
+        return '<option value="'+p+'">'+lbl+'</option>';
+      }).join("");
+      perSel.style.display="";
+      state.period=periods.length?periods[periods.length-1]:null;
+      perSel.value=state.period;
+    }
+    renderFn();
+  });
+  perSel.addEventListener("change",function(){state.period=perSel.value;renderFn();});
+  reset.addEventListener("click",function(){state.mode="all";state.period=null;modeSel.value="all";perSel.style.display="none";renderFn();});
+}
+
+wireFilter("callMode","callPeriod","callReset",callState,CALLS,renderCalls);
+wireFilter("recMode","recPeriod","recReset",recState,RECS,renderRecs);
+wireFilter("qMode","qPeriod","qReset",qState,QDATA,renderQ);
+attachSort("callTable",function(){return callState.data;},renderCallTable);
+attachSort("recTable",function(){return recState.data;},renderRecTable);
+attachSort("kwTable",function(){return KEYWORDS.slice();},renderKw);
+renderCalls();renderRecs();renderKw(KEYWORDS.slice());renderQ();
+</script>
+</body>
+</html>
